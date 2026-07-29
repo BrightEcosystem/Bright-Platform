@@ -39,11 +39,34 @@ function isValidUrl(value) {
 }
 
 function looksLikeJwt(value) {
-  return value.split(".").length === 3;
+  return value.startsWith("eyJ") && value.split(".").length === 3;
 }
 
-function isPostgresUrl(value) {
-  return /^postgres(ql)?:\/\/.+/.test(value);
+function isPublishableKey(value) {
+  return value.startsWith("sb_publishable_") || looksLikeJwt(value);
+}
+
+function isSecretKey(value) {
+  return value.startsWith("sb_secret_") || looksLikeJwt(value);
+}
+
+// Exige URI completa: postgres(ql)://usuario:senha@host:porta/banco.
+// Nunca imprime nenhum componente da URI (usuário, senha, host, porta, banco).
+function isCompletePostgresUri(value) {
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    return false;
+  }
+  if (url.protocol !== "postgres:" && url.protocol !== "postgresql:") return false;
+  if (!url.username) return false;
+  if (!url.password) return false;
+  if (!url.hostname) return false;
+  if (!url.port) return false;
+  const database = url.pathname.replace(/^\//, "");
+  if (!database) return false;
+  return true;
 }
 
 function isProjectRef(value) {
@@ -52,11 +75,11 @@ function isProjectRef(value) {
 
 const CHECKS = [
   { key: "NEXT_PUBLIC_SUPABASE_URL", validate: isValidUrl },
-  { key: "NEXT_PUBLIC_SUPABASE_ANON_KEY", validate: looksLikeJwt },
-  { key: "SUPABASE_SERVICE_ROLE_KEY", validate: looksLikeJwt },
+  { key: "NEXT_PUBLIC_SUPABASE_ANON_KEY", validate: isPublishableKey },
+  { key: "SUPABASE_SERVICE_ROLE_KEY", validate: isSecretKey },
   { key: "SUPABASE_PROJECT_REF", validate: isProjectRef },
-  { key: "DATABASE_URL", validate: isPostgresUrl },
-  { key: "DIRECT_URL", validate: isPostgresUrl },
+  { key: "DATABASE_URL", validate: isCompletePostgresUri },
+  { key: "DIRECT_URL", validate: isCompletePostgresUri },
 ];
 
 loadEnvLocal();
