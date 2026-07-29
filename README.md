@@ -11,6 +11,7 @@ A documentação de arquitetura e decisões de engenharia vive em `docs/`:
 - [`docs/BE-000-Plano-de-Execucao.md`](docs/BE-000-Plano-de-Execucao.md)
 - [`docs/BE-001-Fundacao-Bright-Ecosystem.md`](docs/BE-001-Fundacao-Bright-Ecosystem.md)
 - [`docs/BE-002-Arquitetura-Bright-Platform.md`](docs/BE-002-Arquitetura-Bright-Platform.md)
+- [`docs/BE-003-Arquitetura-de-Dados-e-Supabase.md`](docs/BE-003-Arquitetura-de-Dados-e-Supabase.md)
 
 ## Rodando localmente
 
@@ -31,9 +32,13 @@ npm run build  # build de produção
 npm run start  # servidor de produção (após build)
 ```
 
+## Banco de dados
+
+O modelo de dados multiempresa está definido em `database/migrations/` (ver `docs/BE-003-Arquitetura-de-Dados-e-Supabase.md`). São arquivos SQL versionados, **ainda não aplicados a nenhum projeto Supabase real**. Um relatório de auditoria de dependências (`npm audit`) fica em [`reports/security/SEC-001-Relatorio.md`](reports/security/SEC-001-Relatorio.md).
+
 ## Estado atual
 
-Fundação técnica inicial: Next.js + TypeScript + Tailwind, layout, dashboard e rotas principais como placeholder. **Nenhuma integração real (Supabase, n8n, OpenAI, Vercel) foi conectada nesta fase** — ver `docs/BE-001-Fundacao-Bright-Ecosystem.md` §5.
+Fundação técnica inicial: Next.js + TypeScript + Tailwind, layout, dashboard e rotas principais como placeholder, e modelo de dados multiempresa preparado (migrations locais). **Nenhuma integração real (Supabase, n8n, OpenAI, Vercel) foi conectada nesta fase** — ver `docs/BE-001-Fundacao-Bright-Ecosystem.md` §5.
 
 ## Segurança
 

@@ -9,6 +9,7 @@ Você **não** é o arquiteto do projeto. A arquitetura, regras de negócio, dec
 1. `docs/BE-000-Plano-de-Execucao.md` — plano geral, ordem das plataformas, papéis.
 2. `docs/BE-001-Fundacao-Bright-Ecosystem.md` — visão, princípios obrigatórios, stack, escopo de fase.
 3. `docs/BE-002-Arquitetura-Bright-Platform.md` — arquitetura técnica, estrutura de código, convenções.
+4. `docs/BE-003-Arquitetura-de-Dados-e-Supabase.md` — modelo de dados multiempresa, migrations, RLS planejada.
 
 Nenhuma implementação pode contrariar esses documentos sem uma nova decisão formal registrada em um `BE-XXX` posterior.
 
@@ -29,7 +30,7 @@ Nenhuma implementação pode contrariar esses documentos sem uma nova decisão f
 - Inserir dependência sem necessidade justificada (ver BE-002 §18)
 - Armazenar segredos no repositório
 - Executar tarefas futuras sem autorização
-- Iniciar Supabase, autenticação, RLS, cobrança, integração n8n, integração OpenAI ou conexão Vercel definitiva antes de autorização explícita (ver BE-001 §5 e BE-002 §21)
+- Conectar um projeto Supabase real, executar migrations remotas, iniciar autenticação real, cobrança, integração n8n, integração OpenAI ou conexão Vercel definitiva antes de autorização explícita (ver BE-001 §5 e BE-002 §21). O modelo de dados e as políticas de RLS já estão **definidos como código local** (`database/migrations/`, ver BE-003) — isso não autoriza aplicá-los contra um banco real.
 
 Caso exista dúvida, interrompa a implementação e solicite orientação.
 

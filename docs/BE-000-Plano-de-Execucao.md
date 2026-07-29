@@ -322,5 +322,13 @@ A etapa GitHub será considerada concluída quando o repositório possuir:
 
 ---
 
-**Situação atual:** Etapa 1 em andamento.  
-**Próxima tarefa:** GIT-001 — publicar a documentação inicial.
+**Situação atual:** Etapa 1 (GitHub) concluída. Etapa 2 (Supabase) em preparação — modelo de dados e migrations definidos como código local, sem conexão real.
+
+**Histórico de tarefas concluídas:**
+
+- `GIT-001` — documentação inicial (BE-000, BE-001, BE-002) publicada.
+- `GIT-002` — fundação técnica: Next.js + TypeScript + Tailwind, layout, dashboard, rotas principais, lint e build validados.
+- `SEC-001` — auditoria controlada de dependências (`reports/security/SEC-001-Relatorio.md`), nenhuma correção destrutiva aplicada.
+- `DB-001` — arquitetura de dados multiempresa definida (`BE-003`), migrations e seed de desenvolvimento criados como código local. Nenhum projeto Supabase real conectado, nenhuma migration executada remotamente.
+
+**Próxima tarefa:** aguardando aprovação explícita da Direção de Engenharia para conectar um projeto Supabase real e aplicar as migrations.
