@@ -12,6 +12,9 @@ A documentação de arquitetura e decisões de engenharia vive em `docs/`:
 - [`docs/BE-001-Fundacao-Bright-Ecosystem.md`](docs/BE-001-Fundacao-Bright-Ecosystem.md)
 - [`docs/BE-002-Arquitetura-Bright-Platform.md`](docs/BE-002-Arquitetura-Bright-Platform.md)
 - [`docs/BE-003-Arquitetura-de-Dados-e-Supabase.md`](docs/BE-003-Arquitetura-de-Dados-e-Supabase.md)
+- [`docs/BE-004-Configuracao-do-Projeto-Supabase.md`](docs/BE-004-Configuracao-do-Projeto-Supabase.md)
+- [`docs/decisions/ADR-001-Modelo-de-identidade-e-multiempresa.md`](docs/decisions/ADR-001-Modelo-de-identidade-e-multiempresa.md)
+- [`docs/runbooks/RUN-001-Conectar-Supabase.md`](docs/runbooks/RUN-001-Conectar-Supabase.md)
 
 ## Rodando localmente
 
@@ -36,9 +39,18 @@ npm run start  # servidor de produção (após build)
 
 O modelo de dados multiempresa está definido em `database/migrations/` (ver `docs/BE-003-Arquitetura-de-Dados-e-Supabase.md`). São arquivos SQL versionados, **ainda não aplicados a nenhum projeto Supabase real**. Um relatório de auditoria de dependências (`npm audit`) fica em [`reports/security/SEC-001-Relatorio.md`](reports/security/SEC-001-Relatorio.md).
 
+## Supabase
+
+A fundação de código para conectar o Supabase (`src/lib/supabase/`, `src/config/env.ts`) já existe — ver `docs/BE-004-Configuracao-do-Projeto-Supabase.md`. Nenhum projeto real está conectado ainda. Para conectar, siga o passo a passo em [`docs/runbooks/RUN-001-Conectar-Supabase.md`](docs/runbooks/RUN-001-Conectar-Supabase.md).
+
+```bash
+npm run supabase:check   # valida as variáveis de ambiente (nunca imprime valores)
+npm run supabase:verify  # testa uma consulta pública somente-leitura
+```
+
 ## Estado atual
 
-Fundação técnica inicial: Next.js + TypeScript + Tailwind, layout, dashboard e rotas principais como placeholder, e modelo de dados multiempresa preparado (migrations locais). **Nenhuma integração real (Supabase, n8n, OpenAI, Vercel) foi conectada nesta fase** — ver `docs/BE-001-Fundacao-Bright-Ecosystem.md` §5.
+Fundação técnica inicial: Next.js + TypeScript + Tailwind, layout, dashboard e rotas principais como placeholder, modelo de dados multiempresa preparado (migrations locais) e fundação de conexão Supabase preparada (clients, validação de ambiente). **Nenhuma integração real (Supabase, n8n, OpenAI, Vercel) foi conectada nesta fase** — ver `docs/BE-001-Fundacao-Bright-Ecosystem.md` §5.
 
 ## Segurança
 

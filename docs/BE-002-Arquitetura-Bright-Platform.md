@@ -125,18 +125,22 @@ A plataforma será multiempresa desde o banco até a interface.
 
 ### Entidades iniciais previstas
 
+> Atualizado por `DOC-001` para refletir o modelo aprovado em `BE-003-Arquitetura-de-Dados-e-Supabase.md`. Os nomes `users` e `memberships` desta lista original foram substituídos por `profiles` e `tenant_memberships` — ver `docs/decisions/ADR-001-Modelo-de-identidade-e-multiempresa.md` para o motivo.
+
 - tenants
-- users
-- memberships
+- profiles (anteriormente listado como `users`; vinculado a `auth.users` do Supabase Auth)
+- tenant_memberships (anteriormente listado como `memberships`)
 - roles
 - permissions
 - role_permissions
+- membership_roles (relacionamento entre `tenant_memberships` e `roles`, não estava na lista original)
 - products
 - tenant_products
 - audit_logs
-- integrations
 
-A criação efetiva dessas tabelas ocorrerá em tarefa específica posterior.
+A criação efetiva dessas tabelas ocorreu em `DB-001` (ver `database/migrations/`).
+
+**`integrations`** permanece no roadmap, mas sua implementação será feita em uma tarefa própria e ainda não faz parte das migrations atuais.
 
 ---
 

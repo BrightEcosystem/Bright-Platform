@@ -10,6 +10,8 @@ Você **não** é o arquiteto do projeto. A arquitetura, regras de negócio, dec
 2. `docs/BE-001-Fundacao-Bright-Ecosystem.md` — visão, princípios obrigatórios, stack, escopo de fase.
 3. `docs/BE-002-Arquitetura-Bright-Platform.md` — arquitetura técnica, estrutura de código, convenções.
 4. `docs/BE-003-Arquitetura-de-Dados-e-Supabase.md` — modelo de dados multiempresa, migrations, RLS planejada.
+5. `docs/BE-004-Configuracao-do-Projeto-Supabase.md` — fundação de código para conexão Supabase (clients, validação de ambiente).
+6. `docs/decisions/ADR-001-Modelo-de-identidade-e-multiempresa.md` — decisão sobre os nomes `profiles`/`tenant_memberships`/`membership_roles`.
 
 Nenhuma implementação pode contrariar esses documentos sem uma nova decisão formal registrada em um `BE-XXX` posterior.
 
@@ -30,7 +32,8 @@ Nenhuma implementação pode contrariar esses documentos sem uma nova decisão f
 - Inserir dependência sem necessidade justificada (ver BE-002 §18)
 - Armazenar segredos no repositório
 - Executar tarefas futuras sem autorização
-- Conectar um projeto Supabase real, executar migrations remotas, iniciar autenticação real, cobrança, integração n8n, integração OpenAI ou conexão Vercel definitiva antes de autorização explícita (ver BE-001 §5 e BE-002 §21). O modelo de dados e as políticas de RLS já estão **definidos como código local** (`database/migrations/`, ver BE-003) — isso não autoriza aplicá-los contra um banco real.
+- Conectar um projeto Supabase real, executar migrations remotas, iniciar autenticação real, cobrança, integração n8n, integração OpenAI ou conexão Vercel definitiva antes de autorização explícita (ver BE-001 §5 e BE-002 §21). O modelo de dados, as políticas de RLS e os clients de conexão já estão **definidos como código local** (`database/migrations/` e `src/lib/supabase/`, ver BE-003 e BE-004) — isso não autoriza aplicá-los/conectá-los contra um projeto real.
+- Usar `SUPABASE_SERVICE_ROLE_KEY` em qualquer código que rode no navegador (Client Component, `src/lib/supabase/client.ts`).
 
 Caso exista dúvida, interrompa a implementação e solicite orientação.
 
@@ -44,7 +47,7 @@ Caso exista dúvida, interrompa a implementação e solicite orientação.
 | Tipo | SaaS Multiempresa (Multi-tenant) |
 | Arquitetura | Clean Architecture em camadas (Interface → Aplicação → Domínio → Infraestrutura) |
 | Frontend | Next.js 16, React, TypeScript, Tailwind CSS v4 |
-| Backend | Supabase (PostgreSQL, Auth, Storage) — ainda não conectado |
+| Backend | Supabase (PostgreSQL, Auth, Storage) — fundação de código pronta (`src/lib/supabase/`), projeto real ainda não conectado |
 | Deploy | Vercel — ainda não conectado |
 | Versionamento | GitHub |
 | Automação | n8n — ainda não conectado |
