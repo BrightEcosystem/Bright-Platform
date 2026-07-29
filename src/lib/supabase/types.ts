@@ -35,6 +35,7 @@ export type Database = {
         Row: Timestamps & {
           id: string;
           full_name: string | null;
+          avatar_url: string | null;
           email: string;
           status: string;
           deleted_at: string | null;
@@ -42,6 +43,7 @@ export type Database = {
         Insert: Partial<Timestamps> & {
           id: string;
           full_name?: string | null;
+          avatar_url?: string | null;
           email: string;
           status?: string;
           deleted_at?: string | null;
