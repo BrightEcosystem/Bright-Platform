@@ -1,8 +1,9 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
+import { ACTIVE_TENANT_COOKIE } from "@/lib/auth/session";
 import {
   forgotPasswordSchema,
   loginSchema,
@@ -48,6 +49,13 @@ export async function signIn(_prevState: ActionState, formData: FormData): Promi
 export async function signOut(): Promise<void> {
   const supabase = await createClient();
   await supabase.auth.signOut();
+
+  // Limpa a empresa ativa junto com a sessão — evita que o próximo usuário a
+  // logar neste mesmo navegador herde a seleção de empresa do usuário anterior
+  // (achado da validação AUTH-002).
+  const cookieStore = await cookies();
+  cookieStore.delete(ACTIVE_TENANT_COOKIE);
+
   redirect("/login");
 }
 

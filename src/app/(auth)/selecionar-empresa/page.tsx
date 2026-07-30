@@ -15,11 +15,10 @@ export default async function SelecionarEmpresaPage() {
     redirect("/sem-acesso");
   }
 
-  if (ctx.activeTenantId) {
-    redirect("/dashboard");
-  }
-
-  if (ctx.memberships.length === 1) {
+  // Nota: esta página também é o destino de "trocar empresa" no Header —
+  // por isso não redireciona embora já exista uma empresa ativa. Só
+  // auto-seleciona quando há exatamente uma opção (nada para "trocar").
+  if (ctx.memberships.length === 1 && !ctx.activeTenantId) {
     const only = ctx.memberships[0];
     return (
       <AutoSubmitForm action={selectActiveTenant}>
