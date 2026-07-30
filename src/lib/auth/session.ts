@@ -46,9 +46,9 @@ export async function getAuthContext(): Promise<AuthContext | null> {
       .returns<MembershipQueryRow[]>(),
     supabase
       .from("profiles")
-      .select("full_name, avatar_url")
+      .select("full_name, avatar_url, status")
       .eq("id", user.id)
-      .returns<{ full_name: string | null; avatar_url: string | null }[]>()
+      .returns<{ full_name: string | null; avatar_url: string | null; status: string | null }[]>()
       .single(),
   ]);
 
@@ -77,6 +77,8 @@ export async function getAuthContext(): Promise<AuthContext | null> {
     email: user.email ?? "",
     fullName: profile?.full_name ?? null,
     avatarUrl: profile?.avatar_url ?? null,
+    accountStatus: profile?.status ?? null,
+    lastSignInAt: user.last_sign_in_at ?? null,
     memberships,
     activeTenantId,
   };

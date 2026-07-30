@@ -15,6 +15,8 @@ export type AuthContext = {
   email: string;
   fullName: string | null;
   avatarUrl: string | null;
+  accountStatus: string | null;
+  lastSignInAt: string | null;
   memberships: ActiveMembership[];
   activeTenantId: string | null;
 };

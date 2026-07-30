@@ -81,6 +81,41 @@ export async function hasAnyPermission(
   return false;
 }
 
+/**
+ * Retorna o conjunto (sem duplicatas) de códigos de permissão concedidos pelos
+ * papéis da membership ativa. Usado onde o número/lista completa de permissões
+ * é necessário (ex.: dashboard institucional) em vez de uma checagem booleana
+ * código a código.
+ */
+export async function getGrantedPermissions(
+  supabase: SupabaseClient<Database>,
+  ctx: AuthContext,
+): Promise<string[]> {
+  const membership = getActiveMembership(ctx);
+  if (!membership || membership.roles.length === 0) return [];
+
+  const { data: roles } = await supabase
+    .from("roles")
+    .select("id")
+    .in("name", membership.roles)
+    .returns<{ id: string }[]>();
+
+  const roleIds = (roles ?? []).map((role) => role.id);
+  if (roleIds.length === 0) return [];
+
+  const { data: rolePermissions } = await supabase
+    .from("role_permissions")
+    .select("permission:permissions(code)")
+    .in("role_id", roleIds)
+    .returns<{ permission: { code: string } | null }[]>();
+
+  const codes = (rolePermissions ?? [])
+    .map((rp) => rp.permission?.code)
+    .filter((code): code is string => Boolean(code));
+
+  return Array.from(new Set(codes));
+}
+
 /** O usuário tem todas estas permissões na empresa ativa? */
 export async function hasAllPermissions(
   supabase: SupabaseClient<Database>,
