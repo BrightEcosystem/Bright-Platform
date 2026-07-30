@@ -86,12 +86,20 @@ export type Database = {
         Row: Timestamps & {
           id: string;
           code: string;
+          name: string | null;
           description: string | null;
+          module: string | null;
+          action: string | null;
+          status: string;
         };
         Insert: Partial<Timestamps> & {
           id?: string;
           code: string;
+          name?: string | null;
           description?: string | null;
+          module?: string | null;
+          action?: string | null;
+          status?: string;
         };
         Update: Partial<Database["public"]["Tables"]["permissions"]["Insert"]>;
       };
