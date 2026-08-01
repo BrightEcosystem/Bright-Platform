@@ -2,6 +2,14 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
+## *(este commit)* — docs: congela o modelo de identidade do consumidor (IDENT-001)
+
+Conta Fidelidade definida como entidade central do relacionamento consumidor × empresa parceira (rejeitados: `ConsumidorEmpresa`, `Participação`, `Carteira`), com proprietário, relacionamento, responsabilidades e ciclo de vida. Fluxo Oficial do Consumidor v1 congelado. Matriz Oficial de RLS (Visualiza/Edita/Administra) definida por ator. Aprovado pela Direção após duas rodadas de revisão — todos os itens listados em `IDENT-001 §11` (Congelamento Arquitetural) só podem mudar por ADR. Hash preenchido na próxima atualização.
+
+## `9fbae05` — docs: consolida arquitetura completa da Bright Multi Plataforma (ARCH-001)
+
+Três camadas documentadas (Core da Plataforma, Retaguarda da Empresa, Aplicativo do Consumidor), camadas técnicas, comunicação entre módulos, modularização por contratação (reaproveitando `products`/`tenant_products`), riscos de escalabilidade nomeados. Reconhece `CORE-001` como fundação real da Retaguarda da Empresa. Adiciona `PROJECT-ROADMAP.md` e este `CHANGELOG.md`.
+
 ## `e9cbd67` — docs: corrige ADR-002 e padroniza nomenclatura da Bright Multi Plataforma
 
 Corrige uma versão anterior (nunca commitada) de `ADR-002` que misturava escopo com produtos fora do projeto. Arquitetura oficial: projeto único, três camadas (Core da Plataforma, Retaguarda da Empresa, Aplicativo do Consumidor). Padroniza terminologia em todos os documentos de `docs/product/` e em `BE-002 §3`. Inclui `docs/reports/PRODUCT-002-Relatorio-de-Auditoria-Tecnica.md`.

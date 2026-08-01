@@ -37,7 +37,8 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 ## Arquitetura
 
 - [x] **ADR-002** — Padronização arquitetural: projeto único (Bright Multi Plataforma), três camadas (Core da Plataforma, Retaguarda da Empresa, Aplicativo do Consumidor), identidade única, Marketplace de Benefícios como único marketplace (`e9cbd67`, `docs/decisions/ADR-002-Arquitetura-do-Ecossistema-Bright.md`)
-- [ ] **ARCH-001** — Mapa completo da arquitetura: camadas técnicas, comunicação entre módulos, modularização por contratação, escalabilidade (`docs/architecture/ARCH-001-Arquitetura-Geral.md`) — em execução, aguardando aprovação da Direção
+- [x] **ARCH-001** — Mapa completo da arquitetura: camadas técnicas, comunicação entre módulos, modularização por contratação, escalabilidade (`9fbae05`, `docs/architecture/ARCH-001-Arquitetura-Geral.md`)
+- [x] **IDENT-001** — Modelo de identidade do consumidor: Conta Fidelidade (entidade central), relacionamento N:N, Fluxo Oficial do Consumidor v1, Matriz Oficial de RLS — todos congelados, mudança futura exige ADR (`docs/architecture/IDENT-001-Modelo-de-Identidade.md`)
 
 ## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
 
@@ -49,14 +50,16 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 
 ## Pendências abertas (ver relatórios individuais para detalhes)
 
-- RLS de `profiles` não permite que membros da mesma empresa vejam nome/e-mail uns dos outros (`CORE-001 §10`) — será tratada em `IDENT-001`
+- RLS de `profiles` entre colaboradores administrativos da mesma empresa (`CORE-001 §10`) segue sem solução — não é escopo de Conta Fidelidade/consumidor, continua em aberto
 - Nenhuma automação de auditoria grava em `audit_logs` ainda
 - Nenhuma interface de administração de papéis/permissões (gestão via SQL/migration, `RUN-004`)
 - `project.manager`/`project.viewer` seguem sem uso funcional (fora de escopo do programa de fidelidade)
-- Modelo de identidade do consumidor final ainda não desenhado tecnicamente (decisão de alto nível já tomada em `ADR-002`; desenho fica para `IDENT-001`)
+- Esquema físico da Conta Fidelidade e do livro-razão de lançamentos ainda não desenhado (modelo conceitual e regras já congelados em `IDENT-001`; esquema é `DATA-001`)
+- Permissões `tenant.consumers.view`/`tenant.consumers.manage` são nomes propostos em `IDENT-001 §7` — catálogo formal fica para `DATA-001`
+- Métodos de autenticação do consumidor além de e-mail/senha — não decidido
 - Rotas placeholder órfãs (`empresas`, `agentes-ia`, `workflows`, `integracoes`, `licitacoes`, `financeiro`, `analytics`) não correspondem a nenhum módulo da arquitetura atual (`ARCH-001 §5`) — candidatas a remoção em fase futura de código
 - Conexão real com a Vercel pendente de ação manual da Direção (`RUN-005 §1`)
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `ARCH-001` (em execução) → `IDENT-001` (Modelo de Identidade do Consumidor e Revisão de RLS) → `DATA-001` (Modelo Conceitual de Dados) → `UX-001` (design, sem código) → `DS-001` (Design System) → `APP-001` (Fundação Visual do Aplicativo do Consumidor) → `CORE-002` (a definir).
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DATA-001` (em execução — Modelo Conceitual de Dados) → `UX-001` (Arquitetura da Experiência) → `DS-001` (Design System) → `APP-001` (Aplicativo do Consumidor) → `CORE-002` (Evolução do Core).

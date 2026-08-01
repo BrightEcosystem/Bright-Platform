@@ -16,9 +16,9 @@ Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.
 | ✅ | 31/07/2026 | 31/07/2026 | PRODUCT-001 | Constituição do Produto | `9e3d73e` | Concluída |
 | ✅ | 31/07/2026 | 31/07/2026 | PRODUCT-002 | Auditoria Técnica | — (não commitada isoladamente; ver `docs/reports/`) | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | ADR-002 | Padronização Arquitetural | `e9cbd67` | Concluída |
-| 🔄 | 01/08/2026 | — | ARCH-001 | Arquitetura Completa | — | Em andamento |
-| ⏳ | — | — | IDENT-001 | Modelo de Identidade | — | Aguardando |
-| ⏳ | — | — | DATA-001 | Modelo Conceitual de Dados | — | Aguardando |
+| ✅ | 01/08/2026 | 01/08/2026 | ARCH-001 | Arquitetura Completa | `9fbae05` | Concluída |
+| ✅ | 01/08/2026 | 01/08/2026 | IDENT-001 | Modelo de Identidade | *(este commit — hash preenchido na próxima atualização)* | Concluída |
+| 🔄 | — | — | DATA-001 | Modelo Conceitual de Dados | — | Em andamento |
 | ⏳ | — | — | UX-001 | Arquitetura da Experiência | — | Aguardando |
 | ⏳ | — | — | DS-001 | Design System | — | Aguardando |
 | ⏳ | — | — | APP-001 | Aplicativo do Consumidor | — | Aguardando |
@@ -32,7 +32,7 @@ Cada fase depende do resultado da anterior — construir fora de ordem gera risc
 graph TD
     ADR002[ADR-002<br/>Como o sistema é organizado?] --> ARCH001[ARCH-001<br/>Como os módulos conversam?]
     ARCH001 --> IDENT001[IDENT-001<br/>Quem é o consumidor? Quem é a empresa?]
-    IDENT001 --> DATA001[DATA-001<br/>Quais entidades existirão?]
+    IDENT001 --> DATA001[DATA-001<br/>Quais entidades existirão?<br/>em andamento]
     DATA001 --> UX001[UX-001<br/>Como o consumidor navega?]
     UX001 --> DS001[DS-001<br/>Design system]
     DS001 --> APP001[APP-001<br/>Componentes React]
@@ -44,3 +44,5 @@ graph TD
 - `PRODUCT-002` não gerou um commit próprio isolado — foi uma auditoria técnica (`docs/reports/PRODUCT-002-Relatorio-de-Auditoria-Tecnica.md`), commitada junto com a correção de `ADR-002` (`e9cbd67`).
 - `SUP-003` está listada aqui como marco de fundação do banco; as fases `SEC-001`, `DB-001`, `SUP-001`, `SUP-002`, `SEC-003` (fundação, dependências, conexão inicial, rotação de credenciais) antecedem `SUP-003` e estão detalhadas em `PROJECT-CHECKLIST.md`.
 - Este roadmap reflete apenas a **sequência**; detalhe de escopo/entrega de cada fase concluída está nos relatórios em `docs/reports/`.
+- `IDENT-001` produziu `docs/architecture/IDENT-001-Modelo-de-Identidade.md` — identidade única, Conta Fidelidade (entidade central), relacionamento N:N, Fluxo Oficial do Consumidor v1 e Matriz Oficial de RLS, todos **congelados** (§11 do documento) — mudança futura exige ADR.
+- `DATA-001` produz o esquema conceitual (entidades/atributos/relacionamentos) em cima da Conta Fidelidade já definida — sem SQL.
