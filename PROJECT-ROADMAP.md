@@ -20,7 +20,7 @@ Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.
 | ✅ | 01/08/2026 | 01/08/2026 | IDENT-001 | Modelo de Identidade | `8461039` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | DATA-001 | Modelo Conceitual de Dados | `af83667` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | UX-001 | Arquitetura da Experiência | `318339c` | Concluída |
-| ✅ | 01/08/2026 | 01/08/2026 | DS-001 | Design System | *(hash preenchido retroativamente no commit de APP-001)* | Concluída |
+| ✅ | 01/08/2026 | 01/08/2026 | DS-001 | Design System | `972fb27` | Concluída |
 | ⏳ | — | — | APP-001 | Aplicativo do Consumidor | — | Aguardando |
 | ⏳ | — | — | CORE-002 | Evolução do Core | — | Aguardando |
 

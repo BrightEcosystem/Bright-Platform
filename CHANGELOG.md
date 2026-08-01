@@ -2,7 +2,7 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
-## *(aprovada — hash preenchido retroativamente no commit de APP-001)* — docs: design system do Aplicativo do Consumidor (DS-001)
+## `972fb27` — docs: design system do Aplicativo do Consumidor (DS-001)
 
 Paleta oficial de cores (azul-violeta primária, amarelo-ouro secundária, verde apoio, laranja alerta, vermelho erro, fundo claro), tipografia oficial (Inter), ícones, grid/responsividade (Mobile First confirmado, sem experiência desktop separada), espaçamento, bordas/elevação, regra formal de animação (quatro momentos especiais: subir de nível, concluir missão, ganhar recompensa, abrir prêmio) e catálogo conceitual de 16 componentes (incluindo Card de Recompensa, Indicador de Nível, Barra de XP, Banner Inteligente), implementando os wireframes de `UX-001`. Reconciliação explícita com o padrão visual já existente na Retaguarda. Todas as decisões de marca congeladas — mudança futura exige ADR. Sem código, sem componentes React implementados, sem alteração de banco. Aprovado pela Direção.
 
