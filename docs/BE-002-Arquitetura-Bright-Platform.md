@@ -75,37 +75,47 @@ Responsável por:
 
 ---
 
-## 3. Arquitetura macro do ecossistema
+## 3. Arquitetura macro do projeto
+
+> Atualizado por `ADR-002-Arquitetura-do-Ecossistema-Bright.md`. O diagrama original desta seção (três ramos: Bright CORE / Bright Platform / Produtos, com "Produtos" como um balde genérico incluindo CRM, Licitações, Atendimento IA e outros) foi substituído pelo modelo abaixo. Este projeto — a **Bright Multi Plataforma** — é exclusivamente uma plataforma de fidelidade, cashback, pontuação e gamificação; não há produtos irmãos (CRM, IA, Licitações ou qualquer outro) neste escopo. Ver o ADR para o contexto completo e as alternativas rejeitadas.
 
 ```text
-Bright Ecosystem
-├── Bright CORE
+Bright Multi Plataforma
+├── Core da Plataforma
 │   ├── Autenticação
-│   ├── Empresas
+│   ├── Multiempresa
 │   ├── Usuários
 │   ├── Permissões
-│   ├── Produtos
-│   ├── Licenças
+│   ├── Produtos contratados
 │   ├── Auditoria
-│   ├── Configurações
-│   └── Integrações compartilhadas
-├── Bright Platform
-│   ├── Dashboard
-│   ├── Administração
-│   ├── Marketplace
-│   └── Central de integrações
-└── Produtos
-    ├── CRM
-    ├── Licitações
-    ├── Atendimento IA
-    ├── Automações
-    ├── Financeiro
-    ├── Analytics
-    ├── Delivery
-    └── Produtos futuros
+│   └── Integrações-base
+├── Retaguarda da Empresa
+│   ├── Clientes
+│   ├── Campanhas
+│   ├── Pontuação
+│   ├── Cashback
+│   ├── Gamificação
+│   ├── Benefícios
+│   ├── Comprovantes
+│   ├── Relatórios
+│   └── Configurações
+└── Aplicativo do Consumidor
+    ├── Carteira de pontos
+    ├── Cashback
+    ├── Missões
+    ├── Níveis
+    ├── XP
+    ├── Tickets
+    ├── Roletas
+    ├── Raspadinhas
+    ├── Baús
+    ├── Cupons
+    ├── Indicação
+    ├── Ranking
+    └── Envio de comprovantes
 ```
 
-O CORE deve possuir apenas capacidades compartilhadas. Regras específicas de CRM, licitações, alimentação, telecom ou qualquer outro produto não podem ser inseridas no CORE.
+O Core da Plataforma deve possuir apenas capacidades compartilhadas. Regras específicas da Retaguarda da Empresa ou do Aplicativo do Consumidor não podem ser inseridas no Core. Módulos da Retaguarda são liberados por contratação, reaproveitando `tenant_products`.
 
 ---
 

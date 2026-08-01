@@ -1,7 +1,7 @@
-# 040 — Economia do Ecossistema
+# 040 — Economia da Plataforma
 
 **Status:** Rascunho para revisão da Direção — **contém múltiplos pontos marcados como proposta**
-**Versão:** 0.1.0
+**Versão:** 0.2.0 — terminologia padronizada por `ADR-002-Arquitetura-do-Ecossistema-Bright.md` (ver `CHANGELOG.md`)
 **Parte:** III
 
 ---
@@ -14,14 +14,14 @@
 |---|---|
 | **Empresa parceira** | Financia o cashback/pontos concedidos aos seus próprios clientes — é o custo direto de adquirir/reter aquele cliente. |
 | **Consumidor final** | Recebe o benefício; não paga para participar (proposta — a Direção pode decidir por um modelo de assinatura premium no futuro, mas o modelo base assumido aqui é gratuito para o consumidor). |
-| **Bright** | Cobra da empresa parceira pelo uso da infraestrutura (modelo de monetização da Bright Rewards em si — SaaS fee, percentual sobre volume transacionado, ou híbrido — **decisão pendente da Direção**, listada como bloqueio já registrado na proposta de estrutura anterior). |
+| **Bright** | Cobra da empresa parceira pelo uso da infraestrutura (modelo de monetização do programa em si — SaaS fee, percentual sobre volume transacionado, ou híbrido — **decisão pendente da Direção**, listada como bloqueio já registrado na proposta de estrutura anterior). |
 
 ## 2. Quem subsidia campanhas
 
 Duas fontes possíveis, não mutuamente exclusivas:
 
 - **A própria empresa parceira** subsidia campanhas específicas suas (ex.: "cashback em dobro esta semana") — custo adicional sobre o que ela já paga no modelo padrão.
-- **A Bright** pode, eventualmente, subsidiar campanhas cross-tenant (ex.: uma campanha de lançamento da Bright Rewards em si, para atrair adoção) — isso é orçamento de marketing da Bright, não da empresa parceira, e deve ser contabilizado separadamente (seção 6).
+- **A Bright** pode, eventualmente, subsidiar campanhas cross-tenant (ex.: uma campanha de lançamento do programa em si, para atrair adoção) — isso é orçamento de marketing da Bright, não da empresa parceira, e deve ser contabilizado separadamente (seção 6).
 
 **Proposta:** nenhuma campanha subsidiada pela Bright deve ser lançada sem um teto de orçamento pré-aprovado e um mecanismo de corte automático ao atingir o teto (ver limite de emissão, seção 8) — para evitar que uma campanha vire um passivo descontrolado.
 
@@ -56,8 +56,8 @@ Um ponto "morre" (deixa de existir como saldo disponível) de três formas: **re
 
 Todo ponto no estado `Confirmado` ou `Disponível` é um **passivo** — uma obrigação da empresa parceira (e, no caso de campanha subsidiada pela Bright, da própria Bright) de honrar aquele valor quando resgatado. Isso é conceitualmente equivalente a "receita diferida"/"gift card liability" em contabilidade de varejo.
 
-- **Contabilização proposta:** a Bright Platform deve manter, por tenant, um saldo agregado de passivo de pontos emitidos e não resgatados — dado que a empresa parceira precisa poder consultar a qualquer momento (transparência também para quem paga, não só para quem recebe).
-- **Provisões:** propõe-se que a empresa parceira (e a Bright, para campanhas próprias) mantenha uma provisão contábil baseada na taxa histórica de resgate — não é papel da Bright Rewards dar consultoria contábil à empresa parceira, mas o produto deve fornecer o dado bruto (emitido, resgatado, expirado) para que a contabilidade dela faça esse cálculo.
+- **Contabilização proposta:** o Core da Plataforma deve manter, por tenant, um saldo agregado de passivo de pontos emitidos e não resgatados — dado que a empresa parceira precisa poder consultar a qualquer momento (transparência também para quem paga, não só para quem recebe).
+- **Provisões:** propõe-se que a empresa parceira (e a Bright, para campanhas próprias) mantenha uma provisão contábil baseada na taxa histórica de resgate — não é papel da plataforma dar consultoria contábil à empresa parceira, mas o produto deve fornecer o dado bruto (emitido, resgatado, expirado) para que a contabilidade dela faça esse cálculo.
 - **Breakage:** pontos expirados (nunca resgatados) reduzem o passivo sem custo de caixa — esse "breakage" é, na prática, parte do modelo de sustentabilidade de qualquer programa de fidelidade do mercado. Não deve ser tratado como objetivo do produto (não desenhamos para maximizar expiração, ver `010-Manifesto.md`), mas é um efeito natural e esperado a ser reportado com transparência à empresa parceira.
 
 ## 7. Estornos

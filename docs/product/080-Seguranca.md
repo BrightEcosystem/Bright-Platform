@@ -1,7 +1,7 @@
 # 080 — Segurança, LGPD e Antifraude
 
 **Status:** Rascunho para revisão da Direção
-**Versão:** 0.1.0
+**Versão:** 0.2.0 — terminologia padronizada por `ADR-002-Arquitetura-do-Ecossistema-Bright.md` (ver `CHANGELOG.md`)
 **Parte:** VII
 
 ---
@@ -12,14 +12,14 @@
 
 - Nenhuma mecânica de recompensa deve conceder valor econômico sem passar pelo Motor de Benefícios (`060-IA.md`), que centraliza a checagem contra limite de emissão e sinais de risco.
 - Toda decisão que afete saldo do consumidor deve ser auditável (mesmo princípio já registrado em `060-IA.md §8`).
-- A Bright Rewards herda, do CORE (Bright Platform), o modelo de autorização já existente — autenticação, isolamento por tenant via RLS, permissões granulares. Nenhuma exceção de segurança é criada especificamente para o novo produto sem justificativa registrada.
+- O Aplicativo do Consumidor herda, do Core da Plataforma, o modelo de autorização já existente — autenticação, isolamento por tenant via RLS, permissões granulares. Nenhuma exceção de segurança é criada especificamente para ele sem justificativa registrada.
 
 ## 2. LGPD
 
-Princípios que se aplicam ao consumidor final como novo tipo de titular de dados no ecossistema:
+Princípios que se aplicam ao consumidor final como novo tipo de titular de dados na plataforma:
 
 - Consentimento claro no cadastro sobre quais dados são coletados e para qual finalidade (histórico de compra, localização de uso, comportamento no app).
-- Direito de acesso, correção e exclusão de dados do consumidor final, com o mesmo padrão de seriedade já aplicado a dados de empresas/usuários administrativos na Bright Platform.
+- Direito de acesso, correção e exclusão de dados do consumidor final, com o mesmo padrão de seriedade já aplicado a dados de empresas/usuários administrativos no Core da Plataforma.
 - Dados de comprovante (OCR, `070-Integracoes.md`) podem conter informação sensível (ex.: itens de compra) — tratamento e retenção desses dados é uma análise específica a ser feita em `docs/legal/001-LGPD.md` (a criar), não aqui.
 
 ## 3. Antifraude
