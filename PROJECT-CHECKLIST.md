@@ -45,7 +45,8 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 
 ## Aplicativo do Consumidor
 
-- [x] **APP-001** — Fundação Visual do Aplicativo do Consumidor: 12 rotas de `UX-001` sob `/cliente/*`, os 16 componentes de `DS-001`, navegação inferior fixa, sessão mockada (sem autenticação real), dados mockados para todas as entidades de `DATA-001` (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`, `docs/reports/APP-001-Relatorio.md`) — build e lint validados; deploy real na Vercel segue bloqueado (pendência já registrada em `DEV-001`)
+- [x] **APP-001** — Fundação Visual do Aplicativo do Consumidor: 12 telas de `UX-001` + 1 rota técnica de redirecionamento sob `/cliente/*` (13 rotas no total), os 16 componentes de `DS-001`, navegação inferior fixa, sessão mockada (sem autenticação real), dados mockados para todas as entidades de `DATA-001` (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`, `docs/reports/APP-001-Relatorio.md`) — **implementação concluída; build e lint validados; homologação visual pública pendente, ver `HOM-001`**
+- [ ] **HOM-001** — Homologação do Aplicativo do Consumidor: conectar a Vercel, executar deploy da branch `main`, obter URL pública, validar as 13 rotas em mobile e desktop, corrigir falhas críticas encontradas — **bloqueada**: depende de ação manual da Direção (conexão Vercel × GitHub)
 
 ## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
 
@@ -68,12 +69,13 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - Notificações não têm entidade própria — mapeadas em `UX-001 §11` como Central de Notificações (operacional) e Central de Novidades (promocional); lembretes e avisos institucionais não têm Evento de origem em `DATA-001`, decisão de entidade própria fica para extensão futura, se necessário
 - Tela Jogar do Aplicativo do Consumidor mantém selo "Em breve" até liberação jurídica (`080-Seguranca.md §4`) e implementação técnica estarem satisfeitas
 - Métodos de autenticação do consumidor além de e-mail/senha — não decidido
-- Interação por clique do fluxo Entrar → Início (`APP-001`) não pôde ser verificada ao vivo nesta sessão (limitação do ambiente de teste de navegador, mesma classe já registrada em `CORE-001 §8`) — recomendável reconfirmar em uma sessão com o painel efetivamente interativo
+- Interação por clique do fluxo Entrar → Início (`APP-001`) não pôde ser confirmada por gesto de clique real nesta sessão — diagnóstico completo e reconciliado em `docs/reports/APP-001-Relatorio.md §5`; a lógica foi comprovada correta por invocação direta do handler, mas o gesto de clique em si fica para `HOM-001` validar em dispositivo real
 - Autenticação real de consumidor, saldo/cashback real, OCR de comprovantes e gamificação real não conectados em `APP-001` — dados 100% mockados, conforme escopo desta fase
-- Valores exatos de hex da paleta do Aplicativo do Consumidor foram escolhidos em `APP-001` dentro das famílias congeladas em `DS-001 §4` — sujeitos a ajuste fino quando a Direção revisar visualmente
+- Valores exatos de hex da paleta do Aplicativo do Consumidor foram escolhidos em `APP-001` dentro das famílias congeladas em `DS-001 §4` — sujeitos a ajuste fino quando a Direção revisar visualmente em `HOM-001`
+- **`APP-001` está implementada, mas não homologada** — Decisão da Direção: a validação local (lint/build/HTTP) não substitui a revisão visual pública. `CORE-002` não pode começar antes de `HOM-001` ser aprovada.
 - Rotas placeholder órfãs (`empresas`, `agentes-ia`, `workflows`, `integracoes`, `licitacoes`, `financeiro`, `analytics`) não correspondem a nenhum módulo da arquitetura atual (`ARCH-001 §5`) — candidatas a remoção em fase futura de código
 - Conexão real com a Vercel pendente de ação manual da Direção (`RUN-005 §1`)
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (concluída) → `APP-001` (concluída) → `CORE-002` (Evolução do Core). A Direção definiu que, após `APP-001`, uma homologação completa da experiência deve ocorrer antes de `CORE-002` começar.
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (concluída) → `APP-001` (implementada, aguardando homologação) → `HOM-001` (Homologação do Aplicativo do Consumidor — bloqueada, depende de conexão manual da Vercel) → `CORE-002` (Evolução do Core, bloqueada por `HOM-001`).
