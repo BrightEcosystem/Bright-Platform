@@ -1,0 +1,63 @@
+/* Tokens de design do Aplicativo do Consumidor (DS-001). Importado apenas por src/app/cliente/layout.tsx — não afeta a Retaguarda. */
+
+@theme {
+  --color-consumer-primary: #4f46e5; /* azul-violeta moderno — tecnologia/confiança/inovação */
+  --color-consumer-primary-strong: #4338ca;
+  --color-consumer-secondary: #f59e0b; /* amarelo-ouro — recompensa/conquista/gamificação */
+  --color-consumer-support: #059669; /* verde — cashback/sucesso/confirmação */
+  --color-consumer-warning: #f97316; /* laranja — atenção */
+  --color-consumer-danger: #dc2626; /* vermelho — erro */
+  --color-consumer-bg: #ffffff;
+  --color-consumer-bg-subtle: #f5f5f7;
+  --color-consumer-text: #171717;
+  --color-consumer-text-muted: #6b6b70;
+  --color-consumer-border: #e5e5ea;
+  --color-consumer-level-bronze: #a66a3b;
+  --color-consumer-level-silver: #9ca3af;
+  --color-consumer-level-gold: #d4af37;
+}
+
+/* Regra formal de animação (DS-001 §10) — exatamente quatro momentos especiais.
+   Tudo o mais na interface permanece sem animação diferenciada. */
+@keyframes consumer-level-up {
+  0% { transform: scale(0.85); opacity: 0; }
+  60% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes consumer-mission-complete {
+  0% { transform: translateY(6px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes consumer-reward-earned {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes consumer-prize-reveal {
+  0% { transform: scale(0.7) rotate(-4deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.animate-consumer-level-up {
+  animation: consumer-level-up 0.5s ease-out;
+}
+.animate-consumer-mission-complete {
+  animation: consumer-mission-complete 0.4s ease-out;
+}
+.animate-consumer-reward-earned {
+  animation: consumer-reward-earned 0.6s ease-in-out;
+}
+.animate-consumer-prize-reveal {
+  animation: consumer-prize-reveal 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-consumer-level-up,
+  .animate-consumer-mission-complete,
+  .animate-consumer-reward-earned,
+  .animate-consumer-prize-reveal {
+    animation: none;
+  }
+}

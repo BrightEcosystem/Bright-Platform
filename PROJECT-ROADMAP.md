@@ -21,7 +21,7 @@ Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.
 | ✅ | 01/08/2026 | 01/08/2026 | DATA-001 | Modelo Conceitual de Dados | `af83667` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | UX-001 | Arquitetura da Experiência | `318339c` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | DS-001 | Design System | `972fb27` | Concluída |
-| ⏳ | — | — | APP-001 | Aplicativo do Consumidor | — | Aguardando |
+| ✅ | 01/08/2026 | 01/08/2026 | APP-001 | Fundação Visual do Aplicativo do Consumidor | *(hash preenchido retroativamente no commit de CORE-002)* | Concluída |
 | ⏳ | — | — | CORE-002 | Evolução do Core | — | Aguardando |
 
 ## Por que esta ordem
@@ -35,7 +35,7 @@ graph TD
     IDENT001 --> DATA001[DATA-001<br/>Quais entidades existirão?]
     DATA001 --> UX001[UX-001<br/>Como o consumidor navega?]
     UX001 --> DS001[DS-001<br/>Design system]
-    DS001 --> APP001[APP-001<br/>Componentes React]
+    DS001 --> APP001[APP-001<br/>Fundação visual<br/>dados mockados]
     APP001 --> CORE002[CORE-002<br/>Evolução do Core]
 ```
 
@@ -48,3 +48,4 @@ graph TD
 - `DATA-001` produziu `docs/architecture/DATA-001-Modelo-Conceitual-de-Dados.md` — catálogo de 15 entidades, cada uma com estado (quem cria/altera/consulta/administra/consome), origem da informação, eventos de ciclo de vida e dependências — ancoradas na Conta Fidelidade, sem SQL, sem migrations.
 - `UX-001` produziu `docs/architecture/UX-001-Arquitetura-da-Experiencia.md` — mapa de navegação (12 telas), princípio de UX emocional, Central de Notificações/Novidades separadas, selo "Em breve" na tela Jogar.
 - `DS-001` produziu `docs/architecture/DS-001-Design-System.md` — paleta oficial, tipografia oficial (Inter), Mobile First confirmado, regra formal de quatro momentos especiais de animação e catálogo conceitual de 16 componentes, todos congelados — sem código React ainda.
+- `APP-001` produziu a primeira versão pública em código do Aplicativo do Consumidor (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`) — 12 rotas de `UX-001`, os 16 componentes de `DS-001`, dados 100% mockados, sem autenticação real, sem conexão com banco. Corrigido um bloqueio real: o middleware de autenticação da Retaguarda (`src/proxy.ts`) redirecionava `/cliente/*` para `/login` — agora tratado como caminho público, já que a identidade do consumidor é um domínio separado (`IDENT-001`).

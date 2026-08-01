@@ -43,6 +43,10 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - [x] **UX-001** — Arquitetura da experiência do consumidor: mapa de navegação (12 telas), princípio de UX emocional, Central de Notificações/Novidades, selo "Em breve" na tela Jogar (`318339c`, `docs/architecture/UX-001-Arquitetura-da-Experiencia.md`)
 - [x] **DS-001** — Design System do Aplicativo do Consumidor: paleta oficial, tipografia oficial (Inter), ícones, grid (Mobile First confirmado), espaçamento, regra formal de animação (quatro momentos especiais), catálogo conceitual de 16 componentes, acessibilidade — todos congelados, mudança futura exige ADR (`docs/architecture/DS-001-Design-System.md`)
 
+## Aplicativo do Consumidor
+
+- [x] **APP-001** — Fundação Visual do Aplicativo do Consumidor: 12 rotas de `UX-001` sob `/cliente/*`, os 16 componentes de `DS-001`, navegação inferior fixa, sessão mockada (sem autenticação real), dados mockados para todas as entidades de `DATA-001` (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`, `docs/reports/APP-001-Relatorio.md`) — build e lint validados; deploy real na Vercel segue bloqueado (pendência já registrada em `DEV-001`)
+
 ## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
 
 - 10 migrations aplicadas, `local == remote`
@@ -64,9 +68,12 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - Notificações não têm entidade própria — mapeadas em `UX-001 §11` como Central de Notificações (operacional) e Central de Novidades (promocional); lembretes e avisos institucionais não têm Evento de origem em `DATA-001`, decisão de entidade própria fica para extensão futura, se necessário
 - Tela Jogar do Aplicativo do Consumidor mantém selo "Em breve" até liberação jurídica (`080-Seguranca.md §4`) e implementação técnica estarem satisfeitas
 - Métodos de autenticação do consumidor além de e-mail/senha — não decidido
+- Interação por clique do fluxo Entrar → Início (`APP-001`) não pôde ser verificada ao vivo nesta sessão (limitação do ambiente de teste de navegador, mesma classe já registrada em `CORE-001 §8`) — recomendável reconfirmar em uma sessão com o painel efetivamente interativo
+- Autenticação real de consumidor, saldo/cashback real, OCR de comprovantes e gamificação real não conectados em `APP-001` — dados 100% mockados, conforme escopo desta fase
+- Valores exatos de hex da paleta do Aplicativo do Consumidor foram escolhidos em `APP-001` dentro das famílias congeladas em `DS-001 §4` — sujeitos a ajuste fino quando a Direção revisar visualmente
 - Rotas placeholder órfãs (`empresas`, `agentes-ia`, `workflows`, `integracoes`, `licitacoes`, `financeiro`, `analytics`) não correspondem a nenhum módulo da arquitetura atual (`ARCH-001 §5`) — candidatas a remoção em fase futura de código
 - Conexão real com a Vercel pendente de ação manual da Direção (`RUN-005 §1`)
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (concluída) → `APP-001` (Aplicativo do Consumidor) → `CORE-002` (Evolução do Core).
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (concluída) → `APP-001` (concluída) → `CORE-002` (Evolução do Core). A Direção definiu que, após `APP-001`, uma homologação completa da experiência deve ocorrer antes de `CORE-002` começar.

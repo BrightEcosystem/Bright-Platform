@@ -2,6 +2,10 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
+## *(aprovada — hash preenchido retroativamente no commit de CORE-002)* — feat: fundação visual do Aplicativo do Consumidor (APP-001)
+
+Primeira versão pública em código do Aplicativo do Consumidor, com dados 100% mockados: as 12 rotas de `UX-001` sob `/cliente/*`, os 16 componentes de `DS-001` (incluindo tokens de cor/tipografia/animação), navegação inferior fixa, sessão mockada em `localStorage` (sem autenticação real) e camada de dados mock cobrindo as entidades de `DATA-001`. Corrigido um bloqueio real: o middleware de autenticação da Retaguarda (`src/proxy.ts`) redirecionava qualquer acesso a `/cliente/*` para `/login` — agora tratado como caminho público, já que a identidade do consumidor (`IDENT-001`) é um domínio de autenticação separado do multiempresa administrativo. Build e lint validados; nenhuma tabela, migration, RLS ou autenticação real alterada. Deploy real na Vercel segue bloqueado (pendência já registrada em `DEV-001`). Aprovado pela Direção.
+
 ## `972fb27` — docs: design system do Aplicativo do Consumidor (DS-001)
 
 Paleta oficial de cores (azul-violeta primária, amarelo-ouro secundária, verde apoio, laranja alerta, vermelho erro, fundo claro), tipografia oficial (Inter), ícones, grid/responsividade (Mobile First confirmado, sem experiência desktop separada), espaçamento, bordas/elevação, regra formal de animação (quatro momentos especiais: subir de nível, concluir missão, ganhar recompensa, abrir prêmio) e catálogo conceitual de 16 componentes (incluindo Card de Recompensa, Indicador de Nível, Barra de XP, Banner Inteligente), implementando os wireframes de `UX-001`. Reconciliação explícita com o padrão visual já existente na Retaguarda. Todas as decisões de marca congeladas — mudança futura exige ADR. Sem código, sem componentes React implementados, sem alteração de banco. Aprovado pela Direção.

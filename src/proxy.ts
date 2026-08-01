@@ -4,7 +4,14 @@ import { publicEnv } from "@/config/env";
 
 const PUBLIC_PATHS = ["/login", "/esqueci-minha-senha", "/redefinir-senha", "/auth/callback"];
 
+// O Aplicativo do Consumidor (APP-001) tem identidade própria (IDENT-001), separada da
+// autenticação multiempresa da Retaguarda — não deve ser bloqueado por esta checagem de sessão.
+function isConsumerPath(pathname: string): boolean {
+  return pathname === "/cliente" || pathname.startsWith("/cliente/");
+}
+
 function isPublicPath(pathname: string): boolean {
+  if (isConsumerPath(pathname)) return true;
   return PUBLIC_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));
 }
 
