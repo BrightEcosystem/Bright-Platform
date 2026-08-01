@@ -19,8 +19,8 @@ Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.
 | ✅ | 01/08/2026 | 01/08/2026 | ARCH-001 | Arquitetura Completa | `9fbae05` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | IDENT-001 | Modelo de Identidade | `8461039` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | DATA-001 | Modelo Conceitual de Dados | `af83667` | Concluída |
-| ✅ | 01/08/2026 | 01/08/2026 | UX-001 | Arquitetura da Experiência | `pendente` | Concluída |
-| 🔄 | 01/08/2026 | — | DS-001 | Design System | — | Em andamento |
+| ✅ | 01/08/2026 | 01/08/2026 | UX-001 | Arquitetura da Experiência | `318339c` | Concluída |
+| ✅ | 01/08/2026 | 01/08/2026 | DS-001 | Design System | *(hash preenchido retroativamente no commit de APP-001)* | Concluída |
 | ⏳ | — | — | APP-001 | Aplicativo do Consumidor | — | Aguardando |
 | ⏳ | — | — | CORE-002 | Evolução do Core | — | Aguardando |
 
@@ -34,7 +34,7 @@ graph TD
     ARCH001 --> IDENT001[IDENT-001<br/>Quem é o consumidor? Quem é a empresa?]
     IDENT001 --> DATA001[DATA-001<br/>Quais entidades existirão?]
     DATA001 --> UX001[UX-001<br/>Como o consumidor navega?]
-    UX001 --> DS001[DS-001<br/>Design system<br/>em andamento]
+    UX001 --> DS001[DS-001<br/>Design system]
     DS001 --> APP001[APP-001<br/>Componentes React]
     APP001 --> CORE002[CORE-002<br/>Evolução do Core]
 ```
@@ -47,4 +47,4 @@ graph TD
 - `IDENT-001` produziu `docs/architecture/IDENT-001-Modelo-de-Identidade.md` — identidade única, Conta Fidelidade (entidade central), relacionamento N:N, Fluxo Oficial do Consumidor v1 e Matriz Oficial de RLS, todos **congelados** (§11 do documento) — mudança futura exige ADR.
 - `DATA-001` produziu `docs/architecture/DATA-001-Modelo-Conceitual-de-Dados.md` — catálogo de 15 entidades, cada uma com estado (quem cria/altera/consulta/administra/consome), origem da informação, eventos de ciclo de vida e dependências — ancoradas na Conta Fidelidade, sem SQL, sem migrations.
 - `UX-001` produziu `docs/architecture/UX-001-Arquitetura-da-Experiencia.md` — mapa de navegação (12 telas), princípio de UX emocional, Central de Notificações/Novidades separadas, selo "Em breve" na tela Jogar.
-- `DS-001` traduz esta arquitetura em identidade visual e biblioteca de componentes — sem código React ainda.
+- `DS-001` produziu `docs/architecture/DS-001-Design-System.md` — paleta oficial, tipografia oficial (Inter), Mobile First confirmado, regra formal de quatro momentos especiais de animação e catálogo conceitual de 16 componentes, todos congelados — sem código React ainda.

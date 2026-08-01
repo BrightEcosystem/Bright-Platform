@@ -2,7 +2,11 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
-## *(este commit)* — docs: arquitetura da experiência do consumidor (UX-001)
+## *(aprovada — hash preenchido retroativamente no commit de APP-001)* — docs: design system do Aplicativo do Consumidor (DS-001)
+
+Paleta oficial de cores (azul-violeta primária, amarelo-ouro secundária, verde apoio, laranja alerta, vermelho erro, fundo claro), tipografia oficial (Inter), ícones, grid/responsividade (Mobile First confirmado, sem experiência desktop separada), espaçamento, bordas/elevação, regra formal de animação (quatro momentos especiais: subir de nível, concluir missão, ganhar recompensa, abrir prêmio) e catálogo conceitual de 16 componentes (incluindo Card de Recompensa, Indicador de Nível, Barra de XP, Banner Inteligente), implementando os wireframes de `UX-001`. Reconciliação explícita com o padrão visual já existente na Retaguarda. Todas as decisões de marca congeladas — mudança futura exige ADR. Sem código, sem componentes React implementados, sem alteração de banco. Aprovado pela Direção.
+
+## `318339c` — docs: arquitetura da experiência do consumidor (UX-001)
 
 Mapa de navegação completo (12 telas), wireframes textuais e fluxo por tela (objetivo/componentes/ações/estados/navegação/regras), fluxos de onboarding, envio de comprovantes, missões, gamificação, Marketplace de Benefícios, notificações e campanhas. Princípio de UX Emocional (cinco perguntas-guia). Notificações separadas em Central de Notificações (operacional) e Central de Novidades (promocional). Estado "Primeiro acesso" em todas as telas. Selo "Em breve" obrigatório na tela Jogar até liberação jurídica e implementação técnica. Seleção de contexto de empresa não bloqueante, conforme `IDENT-001`. Aprovado pela Direção. Sem código, sem componentes React, sem alteração de banco.
 

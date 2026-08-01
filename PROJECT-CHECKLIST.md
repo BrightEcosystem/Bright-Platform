@@ -40,7 +40,8 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - [x] **ARCH-001** — Mapa completo da arquitetura: camadas técnicas, comunicação entre módulos, modularização por contratação, escalabilidade (`9fbae05`, `docs/architecture/ARCH-001-Arquitetura-Geral.md`)
 - [x] **IDENT-001** — Modelo de identidade do consumidor: Conta Fidelidade (entidade central), relacionamento N:N, Fluxo Oficial do Consumidor v1, Matriz Oficial de RLS — todos congelados, mudança futura exige ADR (`8461039`, `docs/architecture/IDENT-001-Modelo-de-Identidade.md`)
 - [x] **DATA-001** — Modelo conceitual de dados: 15 entidades do domínio de fidelidade/gamificação, cada uma com estado (cria/altera/consulta/administra/consome), origem, eventos e dependências, ancoradas na Conta Fidelidade (`af83667`, `docs/architecture/DATA-001-Modelo-Conceitual-de-Dados.md`)
-- [x] **UX-001** — Arquitetura da experiência do consumidor: mapa de navegação (12 telas), princípio de UX emocional, Central de Notificações/Novidades, selo "Em breve" na tela Jogar (`docs/architecture/UX-001-Arquitetura-da-Experiencia.md`)
+- [x] **UX-001** — Arquitetura da experiência do consumidor: mapa de navegação (12 telas), princípio de UX emocional, Central de Notificações/Novidades, selo "Em breve" na tela Jogar (`318339c`, `docs/architecture/UX-001-Arquitetura-da-Experiencia.md`)
+- [x] **DS-001** — Design System do Aplicativo do Consumidor: paleta oficial, tipografia oficial (Inter), ícones, grid (Mobile First confirmado), espaçamento, regra formal de animação (quatro momentos especiais), catálogo conceitual de 16 componentes, acessibilidade — todos congelados, mudança futura exige ADR (`docs/architecture/DS-001-Design-System.md`)
 
 ## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
 
@@ -68,4 +69,4 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (em execução — Design System) → `APP-001` (Aplicativo do Consumidor) → `CORE-002` (Evolução do Core).
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (concluída) → `APP-001` (Aplicativo do Consumidor) → `CORE-002` (Evolução do Core).
