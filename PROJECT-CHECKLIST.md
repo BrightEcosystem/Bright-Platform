@@ -38,7 +38,8 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 
 - [x] **ADR-002** — Padronização arquitetural: projeto único (Bright Multi Plataforma), três camadas (Core da Plataforma, Retaguarda da Empresa, Aplicativo do Consumidor), identidade única, Marketplace de Benefícios como único marketplace (`e9cbd67`, `docs/decisions/ADR-002-Arquitetura-do-Ecossistema-Bright.md`)
 - [x] **ARCH-001** — Mapa completo da arquitetura: camadas técnicas, comunicação entre módulos, modularização por contratação, escalabilidade (`9fbae05`, `docs/architecture/ARCH-001-Arquitetura-Geral.md`)
-- [x] **IDENT-001** — Modelo de identidade do consumidor: Conta Fidelidade (entidade central), relacionamento N:N, Fluxo Oficial do Consumidor v1, Matriz Oficial de RLS — todos congelados, mudança futura exige ADR (`docs/architecture/IDENT-001-Modelo-de-Identidade.md`)
+- [x] **IDENT-001** — Modelo de identidade do consumidor: Conta Fidelidade (entidade central), relacionamento N:N, Fluxo Oficial do Consumidor v1, Matriz Oficial de RLS — todos congelados, mudança futura exige ADR (`8461039`, `docs/architecture/IDENT-001-Modelo-de-Identidade.md`)
+- [x] **DATA-001** — Modelo conceitual de dados: 15 entidades do domínio de fidelidade/gamificação, cada uma com estado (cria/altera/consulta/administra/consome), origem, eventos e dependências, ancoradas na Conta Fidelidade (`docs/architecture/DATA-001-Modelo-Conceitual-de-Dados.md`)
 
 ## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
 
@@ -54,7 +55,9 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - Nenhuma automação de auditoria grava em `audit_logs` ainda
 - Nenhuma interface de administração de papéis/permissões (gestão via SQL/migration, `RUN-004`)
 - `project.manager`/`project.viewer` seguem sem uso funcional (fora de escopo do programa de fidelidade)
-- Esquema físico da Conta Fidelidade e do livro-razão de lançamentos ainda não desenhado (modelo conceitual e regras já congelados em `IDENT-001`; esquema é `DATA-001`)
+- Esquema físico (tabelas, tipos, índices, migrations) das entidades de `DATA-001` ainda não criado — deliberado, fora de escopo documental
+- Indicação foi formalizada pela primeira vez em `DATA-001 §2.10`, sem desenho de produto anterior — aguardando confirmação da Direção
+- Decisão de escopo de Ranking (por empresa vs. comunidade cross-empresa) segue pendente (`docs/product/090-Roadmap.md §8` item 7, reafirmada em `DATA-001 §8`)
 - Permissões `tenant.consumers.view`/`tenant.consumers.manage` são nomes propostos em `IDENT-001 §7` — catálogo formal fica para `DATA-001`
 - Métodos de autenticação do consumidor além de e-mail/senha — não decidido
 - Rotas placeholder órfãs (`empresas`, `agentes-ia`, `workflows`, `integracoes`, `licitacoes`, `financeiro`, `analytics`) não correspondem a nenhum módulo da arquitetura atual (`ARCH-001 §5`) — candidatas a remoção em fase futura de código
@@ -62,4 +65,4 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DATA-001` (em execução — Modelo Conceitual de Dados) → `UX-001` (Arquitetura da Experiência) → `DS-001` (Design System) → `APP-001` (Aplicativo do Consumidor) → `CORE-002` (Evolução do Core).
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `UX-001` (em execução — Arquitetura da Experiência) → `DS-001` (Design System) → `APP-001` (Aplicativo do Consumidor) → `CORE-002` (Evolução do Core).

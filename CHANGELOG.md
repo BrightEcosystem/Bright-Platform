@@ -2,9 +2,13 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
-## *(este commit)* — docs: congela o modelo de identidade do consumidor (IDENT-001)
+## *(este commit)* — docs: modelo conceitual de dados da Bright Multi Plataforma (DATA-001)
 
-Conta Fidelidade definida como entidade central do relacionamento consumidor × empresa parceira (rejeitados: `ConsumidorEmpresa`, `Participação`, `Carteira`), com proprietário, relacionamento, responsabilidades e ciclo de vida. Fluxo Oficial do Consumidor v1 congelado. Matriz Oficial de RLS (Visualiza/Edita/Administra) definida por ator. Aprovado pela Direção após duas rodadas de revisão — todos os itens listados em `IDENT-001 §11` (Congelamento Arquitetural) só podem mudar por ADR. Hash preenchido na próxima atualização.
+Catálogo de 15 entidades do domínio de fidelidade/gamificação, todas ancoradas na Conta Fidelidade (`IDENT-001`), com estado (cria/altera/consulta/administra/consome), origem da informação, eventos de ciclo de vida e dependências por entidade. Diagrama ER completo. "Marketplace" padronizado como "Marketplace de Benefícios". Aprovado pela Direção. Sem SQL, sem migrations, sem alteração de banco. Hash preenchido na próxima atualização.
+
+## `8461039` — docs: congela o modelo de identidade do consumidor (IDENT-001)
+
+Conta Fidelidade definida como entidade central do relacionamento consumidor × empresa parceira (rejeitados: `ConsumidorEmpresa`, `Participação`, `Carteira`), com proprietário, relacionamento, responsabilidades e ciclo de vida. Fluxo Oficial do Consumidor v1 congelado. Matriz Oficial de RLS (Visualiza/Edita/Administra) definida por ator. Aprovado pela Direção após duas rodadas de revisão — todos os itens listados em `IDENT-001 §11` (Congelamento Arquitetural) só podem mudar por ADR.
 
 ## `9fbae05` — docs: consolida arquitetura completa da Bright Multi Plataforma (ARCH-001)
 
