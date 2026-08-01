@@ -2,9 +2,13 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
-## *(este commit)* — docs: modelo conceitual de dados da Bright Multi Plataforma (DATA-001)
+## *(este commit)* — docs: arquitetura da experiência do consumidor (UX-001)
 
-Catálogo de 15 entidades do domínio de fidelidade/gamificação, todas ancoradas na Conta Fidelidade (`IDENT-001`), com estado (cria/altera/consulta/administra/consome), origem da informação, eventos de ciclo de vida e dependências por entidade. Diagrama ER completo. "Marketplace" padronizado como "Marketplace de Benefícios". Aprovado pela Direção. Sem SQL, sem migrations, sem alteração de banco. Hash preenchido na próxima atualização.
+Mapa de navegação completo (12 telas), wireframes textuais e fluxo por tela (objetivo/componentes/ações/estados/navegação/regras), fluxos de onboarding, envio de comprovantes, missões, gamificação, Marketplace de Benefícios, notificações e campanhas. Princípio de UX Emocional (cinco perguntas-guia). Notificações separadas em Central de Notificações (operacional) e Central de Novidades (promocional). Estado "Primeiro acesso" em todas as telas. Selo "Em breve" obrigatório na tela Jogar até liberação jurídica e implementação técnica. Seleção de contexto de empresa não bloqueante, conforme `IDENT-001`. Aprovado pela Direção. Sem código, sem componentes React, sem alteração de banco.
+
+## `af83667` — docs: modelo conceitual de dados da Bright Multi Plataforma (DATA-001)
+
+Catálogo de 15 entidades do domínio de fidelidade/gamificação, todas ancoradas na Conta Fidelidade (`IDENT-001`), com estado (cria/altera/consulta/administra/consome), origem da informação, eventos de ciclo de vida e dependências por entidade. Diagrama ER completo. "Marketplace" padronizado como "Marketplace de Benefícios". Aprovado pela Direção. Sem SQL, sem migrations, sem alteração de banco.
 
 ## `8461039` — docs: congela o modelo de identidade do consumidor (IDENT-001)
 

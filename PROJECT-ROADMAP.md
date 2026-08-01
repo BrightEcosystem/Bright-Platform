@@ -18,9 +18,9 @@ Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.
 | ✅ | 01/08/2026 | 01/08/2026 | ADR-002 | Padronização Arquitetural | `e9cbd67` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | ARCH-001 | Arquitetura Completa | `9fbae05` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | IDENT-001 | Modelo de Identidade | `8461039` | Concluída |
-| ✅ | 01/08/2026 | 01/08/2026 | DATA-001 | Modelo Conceitual de Dados | `pendente` | Concluída |
-| 🔄 | 01/08/2026 | — | UX-001 | Arquitetura da Experiência | — | Em andamento |
-| ⏳ | — | — | DS-001 | Design System | — | Aguardando |
+| ✅ | 01/08/2026 | 01/08/2026 | DATA-001 | Modelo Conceitual de Dados | `af83667` | Concluída |
+| ✅ | 01/08/2026 | 01/08/2026 | UX-001 | Arquitetura da Experiência | `pendente` | Concluída |
+| 🔄 | 01/08/2026 | — | DS-001 | Design System | — | Em andamento |
 | ⏳ | — | — | APP-001 | Aplicativo do Consumidor | — | Aguardando |
 | ⏳ | — | — | CORE-002 | Evolução do Core | — | Aguardando |
 
@@ -33,8 +33,8 @@ graph TD
     ADR002[ADR-002<br/>Como o sistema é organizado?] --> ARCH001[ARCH-001<br/>Como os módulos conversam?]
     ARCH001 --> IDENT001[IDENT-001<br/>Quem é o consumidor? Quem é a empresa?]
     IDENT001 --> DATA001[DATA-001<br/>Quais entidades existirão?]
-    DATA001 --> UX001[UX-001<br/>Como o consumidor navega?<br/>em andamento]
-    UX001 --> DS001[DS-001<br/>Design system]
+    DATA001 --> UX001[UX-001<br/>Como o consumidor navega?]
+    UX001 --> DS001[DS-001<br/>Design system<br/>em andamento]
     DS001 --> APP001[APP-001<br/>Componentes React]
     APP001 --> CORE002[CORE-002<br/>Evolução do Core]
 ```
@@ -46,4 +46,5 @@ graph TD
 - Este roadmap reflete apenas a **sequência**; detalhe de escopo/entrega de cada fase concluída está nos relatórios em `docs/reports/`.
 - `IDENT-001` produziu `docs/architecture/IDENT-001-Modelo-de-Identidade.md` — identidade única, Conta Fidelidade (entidade central), relacionamento N:N, Fluxo Oficial do Consumidor v1 e Matriz Oficial de RLS, todos **congelados** (§11 do documento) — mudança futura exige ADR.
 - `DATA-001` produziu `docs/architecture/DATA-001-Modelo-Conceitual-de-Dados.md` — catálogo de 15 entidades, cada uma com estado (quem cria/altera/consulta/administra/consome), origem da informação, eventos de ciclo de vida e dependências — ancoradas na Conta Fidelidade, sem SQL, sem migrations.
-- `UX-001` produz a arquitetura de navegação/wireframes do Aplicativo do Consumidor sobre este modelo de entidades.
+- `UX-001` produziu `docs/architecture/UX-001-Arquitetura-da-Experiencia.md` — mapa de navegação (12 telas), princípio de UX emocional, Central de Notificações/Novidades separadas, selo "Em breve" na tela Jogar.
+- `DS-001` traduz esta arquitetura em identidade visual e biblioteca de componentes — sem código React ainda.
