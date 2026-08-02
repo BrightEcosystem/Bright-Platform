@@ -22,8 +22,9 @@ Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.
 | ✅ | 01/08/2026 | 01/08/2026 | UX-001 | Arquitetura da Experiência | `318339c` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | DS-001 | Design System | `972fb27` | Concluída |
 | 🟡 | 01/08/2026 | — | APP-001 | Fundação Visual do Aplicativo do Consumidor | `680918a` | Implementada, aguardando homologação |
-| ⏳ | — | — | HOM-001 | Homologação do Aplicativo do Consumidor | — | Próxima fase |
-| ⏳ | — | — | CORE-002 | Evolução do Core | — | Bloqueada por HOM-001 |
+| ⏳ | — | — | HOM-001 | Homologação do Aplicativo do Consumidor | — | Próxima fase — aguardando URL pública |
+| ⏳ | — | — | QA-001 | Estabilização Pós-Homologação | — | Aguardando HOM-001 |
+| ⏳ | — | — | CORE-002 | Evolução do Core | — | Aguardando QA-001 |
 
 ## Por que esta ordem
 
@@ -38,7 +39,8 @@ graph TD
     UX001 --> DS001[DS-001<br/>Design system]
     DS001 --> APP001[APP-001<br/>Fundação visual<br/>implementada]
     APP001 --> HOM001[HOM-001<br/>Homologação pública<br/>bloqueada por Vercel]
-    HOM001 --> CORE002[CORE-002<br/>Evolução do Core]
+    HOM001 --> QA001[QA-001<br/>Estabilização<br/>sem features novas]
+    QA001 --> CORE002[CORE-002<br/>Evolução do Core]
 ```
 
 ## Notas
@@ -52,3 +54,4 @@ graph TD
 - `DS-001` produziu `docs/architecture/DS-001-Design-System.md` — paleta oficial, tipografia oficial (Inter), Mobile First confirmado, regra formal de quatro momentos especiais de animação e catálogo conceitual de 16 componentes, todos congelados — sem código React ainda.
 - `APP-001` produziu a primeira versão pública em código do Aplicativo do Consumidor (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`) — 12 telas de `UX-001` + 1 rota técnica de redirecionamento (13 rotas Next.js no total, contagem congelada em `docs/reports/APP-001-Relatorio.md §2`), os 16 componentes de `DS-001`, dados 100% mockados, sem autenticação real, sem conexão com banco. Corrigido um bloqueio real: o middleware de autenticação da Retaguarda (`src/proxy.ts`) redirecionava `/cliente/*` para `/login` — agora tratado como caminho público, já que a identidade do consumidor é um domínio separado (`IDENT-001`). **Status: implementação concluída — homologação pública pendente (`HOM-001`), decisão da Direção que a validação local (lint/build/HTTP) não substitui a revisão visual publicada.**
 - `HOM-001` (próxima fase): homologação pública da APP-001 — deploy na Vercel, validação das 13 rotas em mobile/desktop, correção de falhas críticas encontradas. Bloqueada externamente pela conexão manual entre a Vercel e o GitHub (ação da Direção). `CORE-002` não pode começar antes de `HOM-001` ser aprovada.
+- `QA-001` (nova fase, formalizada pela Direção entre `HOM-001` e `CORE-002`): consolida as correções encontradas durante a homologação — bugs, ajustes de UX, problemas visuais, performance, acessibilidade, atualização de documentação/rastreabilidade. Escopo exclusivo de estabilização; **nenhuma funcionalidade nova é desenvolvida nesta fase**. Só inicia após `HOM-001` ser aprovada ou reprovada com plano de correção definido.
