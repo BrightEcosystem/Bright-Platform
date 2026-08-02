@@ -47,7 +47,7 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 
 - [x] **APP-001** — Fundação Visual do Aplicativo do Consumidor: 12 telas de `UX-001` + 1 rota técnica de redirecionamento sob `/cliente/*` (13 rotas no total), os 16 componentes de `DS-001`, navegação inferior fixa, sessão mockada (sem autenticação real), dados mockados para todas as entidades de `DATA-001` (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`, `docs/reports/APP-001-Relatorio.md`) — **implementação concluída; build e lint validados; homologação visual pública pendente, ver `HOM-001`**
 - [ ] **HOM-001** — Homologação do Aplicativo do Consumidor: conectar a Vercel, executar deploy da branch `main`, obter URL pública, validar as 13 rotas em mobile e desktop, corrigir falhas críticas encontradas — **bloqueada**: depende de ação manual da Direção (conexão Vercel × GitHub)
-- [ ] **QA-001** — Estabilização Pós-Homologação: consolida as correções encontradas em `HOM-001` (bugs, ajustes de UX, problemas visuais, performance, acessibilidade, atualização de documentação/rastreabilidade) — **escopo exclusivo de estabilização, nenhuma funcionalidade nova** — aguardando conclusão de `HOM-001`
+- [ ] **QA-001** — Estabilização Pós-Homologação (**fase condicional**): só é executada se `HOM-001` reprovar ou identificar ajustes obrigatórios — consolida as correções encontradas (bugs, ajustes de UX, problemas visuais, performance, acessibilidade, atualização de documentação/rastreabilidade) — **escopo exclusivo de estabilização, nenhuma funcionalidade nova**. Se `HOM-001` aprovar sem ajustes, esta fase é pulada e `CORE-002` inicia diretamente.
 
 ## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
 
@@ -73,10 +73,10 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - Interação por clique do fluxo Entrar → Início (`APP-001`) não pôde ser confirmada por gesto de clique real nesta sessão — diagnóstico completo e reconciliado em `docs/reports/APP-001-Relatorio.md §5`; a lógica foi comprovada correta por invocação direta do handler, mas o gesto de clique em si fica para `HOM-001` validar em dispositivo real
 - Autenticação real de consumidor, saldo/cashback real, OCR de comprovantes e gamificação real não conectados em `APP-001` — dados 100% mockados, conforme escopo desta fase
 - Valores exatos de hex da paleta do Aplicativo do Consumidor foram escolhidos em `APP-001` dentro das famílias congeladas em `DS-001 §4` — sujeitos a ajuste fino quando a Direção revisar visualmente em `HOM-001`
-- **`APP-001` está implementada, mas não homologada** — Decisão da Direção: a validação local (lint/build/HTTP) não substitui a revisão visual pública. `CORE-002` não pode começar antes de `HOM-001` e `QA-001` serem concluídas, nessa ordem.
+- **`APP-001` está implementada, mas não homologada** — Decisão da Direção: a validação local (lint/build/HTTP) não substitui a revisão visual pública. `CORE-002` não pode começar antes do gate de decisão pós-`HOM-001`: direto se APROVADO sem ajustes, ou após `QA-001` se REPROVADO/com ajustes obrigatórios (ver `PROJECT-ROADMAP.md`).
 - Rotas placeholder órfãs (`empresas`, `agentes-ia`, `workflows`, `integracoes`, `licitacoes`, `financeiro`, `analytics`) não correspondem a nenhum módulo da arquitetura atual (`ARCH-001 §5`) — candidatas a remoção em fase futura de código
 - Conexão real com a Vercel pendente de ação manual da Direção (`RUN-005 §1`)
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (concluída) → `APP-001` (implementada, aguardando homologação) → `HOM-001` (Homologação do Aplicativo do Consumidor — bloqueada, depende de conexão manual da Vercel) → `QA-001` (Estabilização Pós-Homologação — sem features novas) → `CORE-002` (Evolução do Core, bloqueada por `QA-001`).
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (concluída) → `APP-001` (implementada, aguardando homologação) → `HOM-001` (Homologação do Aplicativo do Consumidor — bloqueada, depende de conexão manual da Vercel) → **gate de decisão da Direção** (APROVADO → `CORE-002` direto; REPROVADO/ajustes obrigatórios → `QA-001`, condicional, sem features novas → nova rodada de `HOM-001` → gate novamente) → `CORE-002` (Evolução do Core).
