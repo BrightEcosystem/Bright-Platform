@@ -2,6 +2,10 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
+## `e59097a` — fix: corrige tema claro do Aplicativo do Consumidor não aplicado (HOM-001)
+
+Falha crítica encontrada durante a homologação pública: o fundo escuro da Retaguarda aparecia em todas as telas do Aplicativo do Consumidor porque o bloco `@theme` de `consumer-theme.css` não estava na cadeia de build do Tailwind (era importado via JS em um layout aninhado, não via `@import` de CSS a partir de `globals.css`). Corrigido movendo a importação para `@import` de CSS na raiz do Tailwind. Confirmado via computed style e capturas de tela em produção. Nenhuma alteração visual na Retaguarda. Relatório completo em `docs/reports/HOM-001-Relatorio.md` — recomendação final: **APROVADO**, aguardando confirmação da Direção.
+
 ## `ad06b6d` — chore: conecta Vercel e realiza primeiro deploy de produção (HOM-001)
 
 Repositório `BrightEcosystem/Bright-Platform` tornado público (decisão da Direção — histórico completo verificado sem segredos antes da mudança) para contornar a limitação do plano Hobby da Vercel com repositórios privados de organização. Projeto `bright-ecosystem/web` conectado ao repositório. Configuradas as duas variáveis exigidas pelo build (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` — valores públicos por design, chave `anon`, não `service_role`). Primeiro deploy de produção com sucesso: `https://web-bn7zgaumy-bright-ecosystem.vercel.app`. Nenhuma credencial privilegiada adicionada, nenhuma migration, nenhum dado real conectado.
