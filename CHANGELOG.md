@@ -2,6 +2,10 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
+## `ad06b6d` — chore: conecta Vercel e realiza primeiro deploy de produção (HOM-001)
+
+Repositório `BrightEcosystem/Bright-Platform` tornado público (decisão da Direção — histórico completo verificado sem segredos antes da mudança) para contornar a limitação do plano Hobby da Vercel com repositórios privados de organização. Projeto `bright-ecosystem/web` conectado ao repositório. Configuradas as duas variáveis exigidas pelo build (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` — valores públicos por design, chave `anon`, não `service_role`). Primeiro deploy de produção com sucesso: `https://web-bn7zgaumy-bright-ecosystem.vercel.app`. Nenhuma credencial privilegiada adicionada, nenhuma migration, nenhum dado real conectado.
+
 ## *(em andamento)* — docs: cria fase HOM-001 e corrige status/relatório de APP-001
 
 A Direção decidiu que a validação local (lint/build/HTTP) não substitui a homologação visual pública exigida antes de `CORE-002`. `APP-001` passa a constar como **implementação concluída, homologação pendente** (antes constava como "Concluída"). Corrigida no relatório de `APP-001` uma ambiguidade sobre o teste do fluxo Entrar → Início (cronologia exata reconciliada: o clique simulado não produziu efeito observável em três tentativas, mas a lógica foi comprovada correta por invocação direta do handler — ver `docs/reports/APP-001-Relatorio.md §5`) e a contagem de rotas (12 telas de `UX-001` + 1 rota técnica de redirecionamento = 13 rotas Next.js, antes descrita de forma inconsistente). Criada a fase `HOM-001` — Homologação do Aplicativo do Consumidor — bloqueada externamente pela conexão manual entre Vercel e GitHub. `CORE-002` não iniciada.

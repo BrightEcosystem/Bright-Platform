@@ -46,7 +46,7 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 ## Aplicativo do Consumidor
 
 - [x] **APP-001** — Fundação Visual do Aplicativo do Consumidor: 12 telas de `UX-001` + 1 rota técnica de redirecionamento sob `/cliente/*` (13 rotas no total), os 16 componentes de `DS-001`, navegação inferior fixa, sessão mockada (sem autenticação real), dados mockados para todas as entidades de `DATA-001` (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`, `docs/reports/APP-001-Relatorio.md`) — **implementação concluída; build e lint validados; homologação visual pública pendente, ver `HOM-001`**
-- [ ] **HOM-001** — Homologação do Aplicativo do Consumidor: conectar a Vercel, executar deploy da branch `main`, obter URL pública, validar as 13 rotas em mobile e desktop, corrigir falhas críticas encontradas — **bloqueada**: depende de ação manual da Direção (conexão Vercel × GitHub)
+- [ ] **HOM-001** — Homologação do Aplicativo do Consumidor: repositório tornado público, Vercel conectada, variáveis mínimas configuradas, primeiro deploy de produção com sucesso (`ad06b6d`, https://web-bn7zgaumy-bright-ecosystem.vercel.app) — **em andamento**: executando a matriz de validação das 13 rotas em mobile e desktop
 - [ ] **QA-001** — Estabilização Pós-Homologação (**fase condicional**): só é executada se `HOM-001` reprovar ou identificar ajustes obrigatórios — consolida as correções encontradas (bugs, ajustes de UX, problemas visuais, performance, acessibilidade, atualização de documentação/rastreabilidade) — **escopo exclusivo de estabilização, nenhuma funcionalidade nova**. Se `HOM-001` aprovar sem ajustes, esta fase é pulada e `CORE-002` inicia diretamente.
 
 ## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
