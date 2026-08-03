@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import "@/styles/consumer-theme.css";
 import { ConsumerSessionProvider } from "@/contexts/consumer-session-context";
 import { ConsumerShell } from "@/components/consumer/ConsumerShell";
 
