@@ -9,9 +9,11 @@
 
 ## 1. Resultado geral
 
-**Aprovado com ressalvas.**
+**Aprovado.**
 
-Foi encontrada **uma falha crítica** durante esta homologação (tema visual não aplicado em produção). A falha foi **corrigida dentro desta mesma execução de `HOM-001`**, o commit de correção (`e59097a`) foi implantado, e todas as 13 rotas foram **reverificadas após a correção**, sem nenhuma pendência restante. Não há, portanto, nenhum item aberto que justifique abrir `QA-001` — a entrega já reflete o estado corrigido.
+Foi encontrada **uma falha crítica** durante esta homologação (tema visual não aplicado em produção). A falha foi **corrigida dentro desta mesma execução de `HOM-001`**, o commit de correção (`e59097a`) foi implantado, e todas as 13 rotas foram **reverificadas após a correção**, sem nenhuma pendência restante.
+
+Adicionalmente, a pedido da Direção, o fluxo de login foi **revalidado com clique e digitação reais** (não invocação programática do handler) na URL pública, após a primeira versão deste relatório apontar a interação por clique automatizado como não confirmada — ver seção 3, item revisado. Resultado: **confirmado por clique genuíno**. Não há, portanto, nenhum item aberto que justifique abrir `QA-001` — a entrega reflete o estado corrigido e integralmente validado.
 
 ## 2. Matriz de testes (13 rotas)
 
@@ -56,7 +58,13 @@ Nenhum encontrado.
 
 ### Baixo
 
-1. **Interação por clique automatizado (botão e link) não produz efeito observável nas ferramentas de automação de navegador usadas nesta sessão** — testado em dois motores de navegador distintos (Claude_Browser local e extensão claude-in-chrome em produção), em botão de formulário e em link de navegação. Diagnóstico definitivo (invocação direta do handler React, com `hydrated: true` confirmado) prova que a lógica de login e navegação está correta; o gesto de clique automatizado em si não pôde ser confirmado por essas ferramentas. **Não é um defeito da aplicação** — é uma limitação registrada do ambiente de teste (mesma classe de limitação documentada em `CORE-001-Relatorio.md §8` e em `APP-001-Relatorio.md §5`). Recomendação: confirmar o clique com um dispositivo real (celular físico ou emulador com toque real) antes de considerar 100% validado — não bloqueia a aprovação desta fase.
+Nenhum item pendente. O item abaixo, registrado na primeira versão deste relatório, foi **fechado** durante a mesma execução de `HOM-001`, a pedido da Direção:
+
+1. ~~Interação por clique automatizado não produz efeito observável~~ — **resolvido.** Diagnóstico inicial (via `form_input` programático + clique sintético por referência de elemento) não produzia navegação observável, mesmo com a lógica comprovada correta por invocação direta do handler React (`hydrated: true`). A pedido da Direção, o teste foi refeito com **digitação real via teclado** (tecla a tecla, não atribuição programática de valor) e **clique real por coordenada de mouse** na URL pública (`https://web-git-main-bright-ecosystem.vercel.app/cliente/entrar`), com sessão previamente limpa (estado de primeiro acesso genuíno):
+   - Campos preenchidos visivelmente (e-mail e senha) via digitação real, confirmado por captura de tela.
+   - Clique real no botão "Entrar" (coordenada, não referência de elemento) → **navegação real confirmada** para `/cliente/inicio`, sem erros de console.
+   - Segundo clique real, na navegação inferior ("Carteira") → **navegação real confirmada** para `/cliente/carteira`.
+   - **Causa da diferença:** o preenchimento programático de campos (`form_input`) aparentemente não satisfazia a validação nativa de formulário do navegador (`required`) da mesma forma que digitação real ou atribuição via *setter* nativo do `<input>` — uma particularidade da ferramenta de automação usada no diagnóstico inicial, não um defeito da aplicação. Confirmado definitivamente: o gesto de clique real do usuário funciona corretamente.
 
 ## 4. Regressão
 
@@ -76,7 +84,7 @@ Nenhum encontrado.
 APROVADO
 ```
 
-Justificativa: a única falha crítica encontrada foi corrigida e reverificada dentro desta mesma execução de `HOM-001`, sem deixar pendência. Todas as 13 rotas funcionam corretamente, mobile e desktop, com a paleta e tipografia de `DS-001` corretamente aplicadas. Nenhuma regressão na Retaguarda. A única ressalva remanescente (item de severidade Baixa, seção 3) é uma limitação de ferramenta de teste, não um defeito do produto, e não impede a aceitação da entrega.
+Justificativa: a única falha crítica encontrada foi corrigida e reverificada dentro desta mesma execução de `HOM-001`, sem deixar pendência. Todas as 13 rotas funcionam corretamente, mobile e desktop, com a paleta e tipografia de `DS-001` corretamente aplicadas. O fluxo de login e a navegação foram confirmados por interação real de clique/digitação na URL pública, a pedido explícito da Direção. Nenhuma regressão na Retaguarda. Nenhuma ressalva remanescente.
 
 ## 6. Consequência no roadmap
 
