@@ -2,6 +2,10 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
+## *(em andamento)* — docs: análise inicial da CORE-002 (plano técnico)
+
+Modelagem física proposta para `contas_fidelidade` e `lancamentos` (tabelas aditivas, sem alterar nada do Core existente), RLS mapeada 1:1 da Matriz Oficial (`IDENT-001 §7`), estratégia de autenticação real do consumidor (identidade única, sem reuso de `tenant_memberships`), e plano de execução em 5 sub-fases com commit isolado cada uma. Nenhuma migration aplicada ainda — aguardando confirmação da Direção. Ver `docs/architecture/CORE-002-Plano-Tecnico.md`.
+
 ## *(gate)* — HOM-001 aprovada pela Direção; QA-001 não executada; CORE-002 liberada
 
 Gate de decisão fechado: a Direção confirmou a recomendação de `HOM-001` (**APROVADO**, sem ressalvas) após a evidência de clique/digitação reais na URL pública. `QA-001` não foi executada — nenhum defeito impeditivo encontrado. `CORE-002` (Evolução do Core — Integração Real) liberada para início: autenticação real do consumidor, Conta Fidelidade real (`IDENT-001`), dados reais do Supabase, carteira/cashback reais, remoção gradual dos mocks. Gamificação e demais mecânicas permanecem fora de escopo nesta fase.
