@@ -45,9 +45,10 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 
 ## Aplicativo do Consumidor
 
-- [x] **APP-001** — Fundação Visual do Aplicativo do Consumidor: 12 telas de `UX-001` + 1 rota técnica de redirecionamento sob `/cliente/*` (13 rotas no total), os 16 componentes de `DS-001`, navegação inferior fixa, sessão mockada (sem autenticação real), dados mockados para todas as entidades de `DATA-001` (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`, `docs/reports/APP-001-Relatorio.md`) — **implementação concluída; homologação pública com recomendação APROVADO, ver `HOM-001`**
-- [x] **HOM-001** — Homologação do Aplicativo do Consumidor: repositório público, Vercel conectada, deploy de produção, 13 rotas validadas mobile/desktop na URL pública, 1 falha crítica encontrada (tema claro não aplicado) e corrigida nesta mesma execução (`e59097a`), regressão da Retaguarda confirmada sem impacto (`docs/reports/HOM-001-Relatorio.md`) — **relatório concluído, recomendação: APROVADO, aguardando confirmação da Direção**
-- [ ] **QA-001** — Estabilização Pós-Homologação (**fase condicional**): só é executada se `HOM-001` reprovar ou identificar ajustes obrigatórios — consolida as correções encontradas (bugs, ajustes de UX, problemas visuais, performance, acessibilidade, atualização de documentação/rastreabilidade) — **escopo exclusivo de estabilização, nenhuma funcionalidade nova**. Recomendação de `HOM-001` é APROVADO sem ajustes pendentes — esta fase não deve ser necessária, sujeito à confirmação da Direção.
+- [x] **APP-001** — Fundação Visual do Aplicativo do Consumidor: 12 telas de `UX-001` + 1 rota técnica de redirecionamento sob `/cliente/*` (13 rotas no total), os 16 componentes de `DS-001`, navegação inferior fixa, sessão mockada (sem autenticação real), dados mockados para todas as entidades de `DATA-001` (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`, `docs/reports/APP-001-Relatorio.md`) — **concluída**
+- [x] **HOM-001** — Homologação do Aplicativo do Consumidor: repositório público, Vercel conectada, deploy de produção, 13 rotas validadas mobile/desktop na URL pública, 1 falha crítica encontrada (tema claro não aplicado) e corrigida nesta mesma execução (`e59097a`), fluxo de login confirmado por clique/digitação reais, regressão da Retaguarda confirmada sem impacto (`docs/reports/HOM-001-Relatorio.md`) — **concluída — Gate: APROVADO pela Direção**
+- [ ] ~~**QA-001**~~ — Estabilização Pós-Homologação (**fase condicional**): **não executada** — a Direção confirmou que nenhum defeito impeditivo foi encontrado em `HOM-001`. Permanece condicional para entregas futuras.
+- [ ] **CORE-002** — Evolução do Core — Integração Real: autenticação real do consumidor, Conta Fidelidade real (`IDENT-001`), dados reais do Supabase, carteira/saldo/cashback reais, remoção gradual dos mocks — **em andamento (análise inicial)**. Fora de escopo nesta fase: gamificação (roleta, raspadinha, baús, missões, ranking, XP), campanhas automáticas, notificações, marketplace operacional.
 
 ## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
 
@@ -73,10 +74,10 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - ~~Interação por clique não confirmada por gesto real~~ — **resolvido em `HOM-001`**: reteste com digitação real via teclado + clique real por coordenada na URL pública confirmou o fluxo Entrar → Início e a navegação inferior funcionando corretamente (`docs/reports/HOM-001-Relatorio.md §3`)
 - Autenticação real de consumidor, saldo/cashback real, OCR de comprovantes e gamificação real não conectados em `APP-001` — dados 100% mockados, conforme escopo desta fase
 - Valores exatos de hex da paleta do Aplicativo do Consumidor foram escolhidos em `APP-001` dentro das famílias congeladas em `DS-001 §4` — sujeitos a ajuste fino quando a Direção revisar visualmente em `HOM-001`
-- **`HOM-001` concluída com recomendação APROVADO** — 1 falha crítica encontrada (tema claro de `DS-001` não aplicado em produção) e corrigida na mesma execução (`e59097a`). `CORE-002` não pode começar antes da confirmação explícita da Direção sobre essa recomendação (ver `PROJECT-ROADMAP.md`, gate de decisão).
+- **`HOM-001` concluída — Gate: APROVADO pela Direção** (1 falha crítica encontrada e corrigida na mesma execução, `e59097a`). `QA-001` não executada. `CORE-002` liberada e em andamento.
 - Rotas placeholder órfãs (`empresas`, `agentes-ia`, `workflows`, `integracoes`, `licitacoes`, `financeiro`, `analytics`) não correspondem a nenhum módulo da arquitetura atual (`ARCH-001 §5`) — candidatas a remoção em fase futura de código
 - Conexão real com a Vercel pendente de ação manual da Direção (`RUN-005 §1`)
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` (concluída) → `APP-001` (implementada) → `HOM-001` (relatório concluído, recomendação APROVADO) → **gate de decisão da Direção** (aguardando confirmação — se confirmado APROVADO, `CORE-002` inicia direto; se REPROVADO, `QA-001` inicia) → `CORE-002` (Evolução do Core).
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` → `APP-001` → `HOM-001` (**Gate: APROVADO**) → `QA-001` (não executada) → `CORE-002` (**em andamento** — análise inicial).

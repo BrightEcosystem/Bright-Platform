@@ -21,11 +21,10 @@ Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.
 | ✅ | 01/08/2026 | 01/08/2026 | DATA-001 | Modelo Conceitual de Dados | `af83667` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | UX-001 | Arquitetura da Experiência | `318339c` | Concluída |
 | ✅ | 01/08/2026 | 01/08/2026 | DS-001 | Design System | `972fb27` | Concluída |
-| 🟡 | 01/08/2026 | — | APP-001 | Fundação Visual do Aplicativo do Consumidor | `680918a` | Implementada — aguardando confirmação da Direção sobre HOM-001 |
-| 🟡 | 01/08/2026 | 02/08/2026 | HOM-001 | Homologação do Aplicativo do Consumidor | `e59097a` | Relatório concluído — **recomendação: APROVADO** — aguardando confirmação da Direção |
-| ⏳ | — | — | *(gate)* | Decisão da Direção: APROVADO ou REPROVADO | — | Aguardando confirmação da Direção sobre a recomendação de `HOM-001` |
-| ⏳ | — | — | QA-001 | Estabilização Pós-Homologação | — | **Condicional** — só executa se HOM-001 reprovar ou exigir ajustes |
-| ⏳ | — | — | CORE-002 | Evolução do Core | — | Aguardando gate (direto se APROVADO; após QA-001 se REPROVADO) |
+| ✅ | 01/08/2026 | 02/08/2026 | APP-001 | Fundação Visual do Aplicativo do Consumidor | `680918a` | Concluída |
+| ✅ | 01/08/2026 | 02/08/2026 | HOM-001 | Homologação do Aplicativo do Consumidor | `e59097a` | Concluída — **Gate: APROVADO** |
+| ➖ | — | — | QA-001 | Estabilização Pós-Homologação | — | **Não executada** — nenhum defeito impeditivo encontrado em `HOM-001` |
+| 🔄 | 02/08/2026 | — | CORE-002 | Evolução do Core — Integração Real | — | Liberada pelo gate — análise inicial em andamento |
 
 ## Por que esta ordem
 
@@ -38,14 +37,12 @@ graph TD
     IDENT001 --> DATA001[DATA-001<br/>Quais entidades existirão?]
     DATA001 --> UX001[UX-001<br/>Como o consumidor navega?]
     UX001 --> DS001[DS-001<br/>Design system]
-    DS001 --> APP001[APP-001<br/>Fundação visual<br/>implementada]
-    APP001 --> HOM001[HOM-001<br/>Homologação pública<br/>bloqueada por Vercel]
-    HOM001 --> GATE{Decisão da Direção<br/>APROVADO ou REPROVADO?}
-    GATE -->|APROVADO, sem ajustes| CORE002[CORE-002<br/>Evolução do Core]
-    GATE -->|REPROVADO ou ajustes obrigatórios| QA001[QA-001<br/>Estabilização condicional<br/>sem features novas]
-    QA001 --> HOM001B[Nova rodada de HOM-001]
-    HOM001B --> GATE
+    DS001 --> APP001[APP-001<br/>Fundação visual]
+    APP001 --> HOM001[HOM-001<br/>Homologação pública<br/>APROVADO]
+    HOM001 --> CORE002[CORE-002<br/>Integração real<br/>em andamento]
 ```
+
+`QA-001` não foi executada — gate aprovado sem ajustes obrigatórios (ver notas abaixo).
 
 ## Notas
 
@@ -57,12 +54,6 @@ graph TD
 - `UX-001` produziu `docs/architecture/UX-001-Arquitetura-da-Experiencia.md` — mapa de navegação (12 telas), princípio de UX emocional, Central de Notificações/Novidades separadas, selo "Em breve" na tela Jogar.
 - `DS-001` produziu `docs/architecture/DS-001-Design-System.md` — paleta oficial, tipografia oficial (Inter), Mobile First confirmado, regra formal de quatro momentos especiais de animação e catálogo conceitual de 16 componentes, todos congelados — sem código React ainda.
 - `APP-001` produziu a primeira versão pública em código do Aplicativo do Consumidor (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`) — 12 telas de `UX-001` + 1 rota técnica de redirecionamento (13 rotas Next.js no total, contagem congelada em `docs/reports/APP-001-Relatorio.md §2`), os 16 componentes de `DS-001`, dados 100% mockados, sem autenticação real, sem conexão com banco. Corrigido um bloqueio real: o middleware de autenticação da Retaguarda (`src/proxy.ts`) redirecionava `/cliente/*` para `/login` — agora tratado como caminho público, já que a identidade do consumidor é um domínio separado (`IDENT-001`). **Status: implementação concluída — homologação pública pendente (`HOM-001`), decisão da Direção que a validação local (lint/build/HTTP) não substitui a revisão visual publicada.**
-- `HOM-001` (relatório concluído, `docs/reports/HOM-001-Relatorio.md`): repositório `BrightEcosystem/Bright-Platform` tornado público (decisão da Direção, sem segredos no histórico) e conectado ao projeto Vercel `bright-ecosystem/web`. Variáveis mínimas configuradas. Primeiro deploy (`ad06b6d`) revelou uma **falha crítica** — tema claro de `DS-001` não aplicado em produção (fundo escuro da Retaguarda aparecendo por trás, causa raiz: `@theme` do CSS do consumidor não estava na cadeia de build do Tailwind) — **corrigida e reverificada** nesta mesma execução (commit `e59097a`). Todas as 13 rotas validadas mobile/desktop na URL pública; regressão da Retaguarda confirmada sem impacto. A pedido da Direção, o fluxo Entrar → Início e a navegação inferior foram **reconfirmados por digitação e clique reais** (não invocação programática) na URL pública. **Recomendação: APROVADO**, aguardando confirmação da Direção conforme o gate abaixo.
-- **Estrutura obrigatória do relatório de `HOM-001`** (critério fixado pela Direção, a seguir literalmente quando a fase iniciar):
-  1. **Resultado geral:** Aprovado / Aprovado com ressalvas / Reprovado.
-  2. **Matriz de testes** — por rota: URL, Status (OK/Falha), Observações, Evidências.
-  3. **Problemas classificados por severidade:** Crítico / Alto / Médio / Baixo.
-  4. **Regressão**, validada explicitamente: Core, Retaguarda, login administrativo, navegação existente, permissões, middleware, layout administrativo.
-  5. **Recomendação final — decisão binária, sem estados intermediários:** `APROVADO` ou `REPROVADO`. Ressalvas ficam documentadas na matriz (item 1), mas não criam um terceiro estado para o avanço do roadmap.
-- **Gate de decisão** (entre `HOM-001` e a fase seguinte): se **APROVADO** sem ajustes obrigatórios, `CORE-002` inicia diretamente — `QA-001` não é executada. Se **REPROVADO** ou se a homologação identificar ajustes obrigatórios, `QA-001` inicia, seguida de uma nova rodada de `HOM-001` até obter APROVADO.
-- `QA-001` (formalizada pela Direção): **fase condicional**, executada **somente se `HOM-001` reprovar ou exigir ajustes obrigatórios** — nunca automática, e só se abre quando existirem itens que realmente impeçam a aceitação da entrega. Escopo exclusivo de estabilização (bugs, ajustes de UX, problemas visuais, performance, acessibilidade, atualização de documentação/rastreabilidade). **Não deve ser usada para:** melhorias futuras, refinamentos de UX não críticos, novas funcionalidades ou mudanças de escopo.
+- `HOM-001` (concluída, `docs/reports/HOM-001-Relatorio.md`): repositório `BrightEcosystem/Bright-Platform` tornado público e conectado ao projeto Vercel `bright-ecosystem/web`. Deploy de produção realizado. Uma falha crítica encontrada (tema claro de `DS-001` não aplicado em produção) foi corrigida e reverificada na mesma execução (`e59097a`). Todas as 13 rotas validadas mobile/desktop na URL pública; regressão da Retaguarda confirmada sem impacto; fluxo de login e navegação confirmados por clique/digitação reais. **Gate: APROVADO pela Direção, sem ressalvas.**
+- `QA-001`: **não executada** — a Direção confirmou que nenhum defeito impeditivo foi encontrado em `HOM-001`. Permanece no roadmap como fase condicional para entregas futuras.
+- `CORE-002` (em andamento): liberada pelo gate. Objetivo — transformar o Aplicativo do Consumidor de prova de conceito mockada em aplicação integrada ao Core: autenticação real do consumidor, Conta Fidelidade real (`IDENT-001`), dados reais do Supabase, carteira/saldo/cashback reais, remoção gradual dos mocks. **Fora de escopo nesta fase:** roleta, raspadinha, baús, missões, ranking, XP, campanhas automáticas, notificações, marketplace operacional — permanecem desacoplados até a base de identidade e carteira estar operacional. Não pode alterar a arquitetura já congelada sem ADR.

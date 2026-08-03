@@ -2,9 +2,17 @@
 
 Histórico de fases do projeto, uma entrada por commit relevante. Segue Conventional Commits (`BE-001 §9`). Para a Constituição de produto especificamente, ver `docs/product/CHANGELOG.md`. Para a sequência/dependência entre fases, ver `PROJECT-ROADMAP.md`.
 
+## *(gate)* — HOM-001 aprovada pela Direção; QA-001 não executada; CORE-002 liberada
+
+Gate de decisão fechado: a Direção confirmou a recomendação de `HOM-001` (**APROVADO**, sem ressalvas) após a evidência de clique/digitação reais na URL pública. `QA-001` não foi executada — nenhum defeito impeditivo encontrado. `CORE-002` (Evolução do Core — Integração Real) liberada para início: autenticação real do consumidor, Conta Fidelidade real (`IDENT-001`), dados reais do Supabase, carteira/cashback reais, remoção gradual dos mocks. Gamificação e demais mecânicas permanecem fora de escopo nesta fase.
+
+## `4da4b92` — docs: confirma fluxo de login por clique real na URL pública (HOM-001)
+
+A pedido da Direção, refeito o teste de interação usando digitação real via teclado e clique real por coordenada de mouse na URL pública, com sessão previamente limpa. Resultado: navegação real confirmada Entrar → Início, e Início → Carteira via navegação inferior, sem erros de console. Ressalva de severidade Baixa removida do relatório de `HOM-001`.
+
 ## `e59097a` — fix: corrige tema claro do Aplicativo do Consumidor não aplicado (HOM-001)
 
-Falha crítica encontrada durante a homologação pública: o fundo escuro da Retaguarda aparecia em todas as telas do Aplicativo do Consumidor porque o bloco `@theme` de `consumer-theme.css` não estava na cadeia de build do Tailwind (era importado via JS em um layout aninhado, não via `@import` de CSS a partir de `globals.css`). Corrigido movendo a importação para `@import` de CSS na raiz do Tailwind. Confirmado via computed style e capturas de tela em produção. Nenhuma alteração visual na Retaguarda. Relatório completo em `docs/reports/HOM-001-Relatorio.md` — recomendação final: **APROVADO**, aguardando confirmação da Direção.
+Falha crítica encontrada durante a homologação pública: o fundo escuro da Retaguarda aparecia em todas as telas do Aplicativo do Consumidor porque o bloco `@theme` de `consumer-theme.css` não estava na cadeia de build do Tailwind (era importado via JS em um layout aninhado, não via `@import` de CSS a partir de `globals.css`). Corrigido movendo a importação para `@import` de CSS na raiz do Tailwind. Confirmado via computed style e capturas de tela em produção. Nenhuma alteração visual na Retaguarda.
 
 ## `ad06b6d` — chore: conecta Vercel e realiza primeiro deploy de produção (HOM-001)
 
