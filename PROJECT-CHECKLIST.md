@@ -49,8 +49,8 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - [x] **HOM-001** — Homologação do Aplicativo do Consumidor: repositório público, Vercel conectada, deploy de produção, 13 rotas validadas mobile/desktop na URL pública, 1 falha crítica encontrada (tema claro não aplicado) e corrigida nesta mesma execução (`e59097a`), fluxo de login confirmado por clique/digitação reais, regressão da Retaguarda confirmada sem impacto (`docs/reports/HOM-001-Relatorio.md`) — **concluída — Gate: APROVADO pela Direção**
 - [ ] ~~**QA-001**~~ — Estabilização Pós-Homologação (**fase condicional**): **não executada** — a Direção confirmou que nenhum defeito impeditivo foi encontrado em `HOM-001`. Permanece condicional para entregas futuras.
 - [x] **CORE-002.1** — Schema, Funções e RLS (Conta Fidelidade / Lançamentos): plano técnico `v0.3.0` (`docs/architecture/CORE-002-Plano-Tecnico.md`) autorizado pela Direção com decisões finais de permissões/estado/idempotência/precisão. 8 migrations aplicadas ao Supabase real: tabelas `contas_fidelidade`/`lancamentos`, 5 funções `security definer`, RLS completa (só `SELECT`), catálogo de permissões estendido (`tenant.consumers.view`/`manage`). Matriz de 24 testes obrigatórios aprovada (2 correções aplicadas na própria execução — ver `docs/reports/CORE-002.1-Relatorio.md`). Dados fictícios 100% removidos. **Concluída.**
-- [ ] **CORE-002.2** — Autenticação Real do Consumidor: login/logout/sessão persistente/recuperação de senha/proteção de rotas via Supabase Auth — **aguardando confirmação da Direção sobre o relatório de CORE-002.1**.
-- [ ] **CORE-002.3** — Conta Fidelidade e carteira reais: `src/services/mock/conta-fidelidade.ts`/`lancamentos.ts` substituídos por serviços reais — aguardando CORE-002.2.
+- [x] **CORE-002.2** — Autenticação Real do Consumidor: login/logout/sessão persistente/recuperação e redefinição de senha/cadastro/proteção de rotas via Supabase Auth (`src/services/consumer-auth/actions.ts`, `src/proxy.ts`). 18/18 critérios de aceite aprovados (`docs/reports/CORE-002.2-Relatorio.md`). Nenhuma migration criada, nenhum mock financeiro alterado. **Concluída.**
+- [ ] **CORE-002.3** — Conta Fidelidade e carteira reais: `src/services/mock/conta-fidelidade.ts`/`lancamentos.ts` substituídos por serviços reais — **aguardando confirmação da Direção sobre o relatório de CORE-002.2**.
 - [ ] **CORE-002.4** — Testes funcionais com dados fictícios, limpeza, validação de regressão — aguardando CORE-002.3.
 - [ ] **CORE-002.5** — Documentação e relatório final de encerramento de CORE-002 — aguardando CORE-002.4.
 
@@ -85,7 +85,8 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - Reabertura de Conta Fidelidade fechada (`status = 'closed'`) não é implementada — processo administrativo excepcional e auditado, deliberadamente fora do escopo de `CORE-002.1` (`docs/reports/CORE-002.1-Relatorio.md §9`)
 - Ciclo completo de `estado` do lançamento (`pendente → confirmado → disponível`) sem mecanismo de transição — o ledger é append-only (nunca `UPDATE`); nesta fase todo lançamento nasce em `disponivel`; automação de confirmação fica para fase futura de gamificação/campanhas
 - Papel `tenant.member` citado nas decisões da Direção não existe fisicamente no catálogo (`PERM-001`) — apenas `platform.admin`/`tenant.admin`/`project.manager`/`project.viewer`
+- Rate limit padrão de envio de e-mail do Supabase (sem SMTP customizado configurado) pode bloquear cadastro/recuperação de senha do consumidor sob uso intensivo — recomendação registrada em `CORE-002.2` de configurar um provedor SMTP customizado antes de abrir o cadastro real ao público
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` → `APP-001` → `HOM-001` (**Gate: APROVADO**) → `QA-001` (não executada) → `CORE-002.1` (**concluída**) → `CORE-002.2` (aguardando autorização da Direção).
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` → `APP-001` → `HOM-001` (**Gate: APROVADO**) → `QA-001` (não executada) → `CORE-002.1` (**concluída**) → `CORE-002.2` (**concluída**) → `CORE-002.3` (aguardando autorização da Direção).

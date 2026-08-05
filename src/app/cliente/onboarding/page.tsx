@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { Gift, Trophy, Wallet } from "lucide-react";
 import { Botao } from "@/components/consumer/Botao";
-import { useConsumerSession } from "@/contexts/consumer-session-context";
 
 const PASSOS = [
   { icone: Wallet, titulo: "Acumule cashback", descricao: "Envie seus comprovantes e receba cashback nas suas compras." },
@@ -14,7 +13,6 @@ const PASSOS = [
 /** Tela Onboarding (UX-001 §5.2) — apresentação inicial antes do primeiro acesso à Início. */
 export default function OnboardingPage() {
   const router = useRouter();
-  const { entrar } = useConsumerSession();
 
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col justify-between gap-8 px-6 py-10">
@@ -33,13 +31,7 @@ export default function OnboardingPage() {
         ))}
       </div>
 
-      <Botao
-        className="w-full"
-        onClick={() => {
-          entrar();
-          router.push("/cliente/inicio");
-        }}
-      >
+      <Botao className="w-full" onClick={() => router.push("/cliente/inicio")}>
         Começar
       </Botao>
     </div>

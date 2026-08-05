@@ -1,46 +1,41 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
-
-const STORAGE_KEY = "bright-consumer-mock-session";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import type { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 
 type ConsumerSessionValue = {
-  autenticado: boolean;
+  usuario: User | null;
   carregando: boolean;
-  entrar: () => void;
-  sair: () => void;
 };
 
 const ConsumerSessionContext = createContext<ConsumerSessionValue | null>(null);
 
 /**
- * Sessão mockada do consumidor — apenas estado local (localStorage), sem autenticação real,
- * sem chamada ao Supabase. APP-001 não conecta identidade real de consumidor (IDENT-001 fica para fase futura).
+ * Sessão real do consumidor (CORE-002.2) — reflete a sessão do Supabase Auth
+ * no cliente para uso de componentes de UI (ex.: mostrar o e-mail do usuário).
+ * NÃO é responsável por proteger rotas: isso é feito no servidor (`src/proxy.ts`,
+ * `auth.getUser()`), nunca apenas por este estado do React.
  */
 export function ConsumerSessionProvider({ children }: { children: ReactNode }) {
-  const [estado, setEstado] = useState({ autenticado: false, carregando: true });
+  const [estado, setEstado] = useState<ConsumerSessionValue>({ usuario: null, carregando: true });
 
   useEffect(() => {
-    // Sincroniza com o localStorage (sistema externo) uma única vez, na montagem no cliente.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setEstado({ autenticado: window.localStorage.getItem(STORAGE_KEY) === "true", carregando: false });
-  }, []);
-  const { autenticado, carregando } = estado;
+    const supabase = createClient();
 
-  const entrar = useCallback(() => {
-    window.localStorage.setItem(STORAGE_KEY, "true");
-    setEstado({ autenticado: true, carregando: false });
-  }, []);
+    supabase.auth.getUser().then(({ data }) => {
+      setEstado({ usuario: data.user, carregando: false });
+    });
 
-  const sair = useCallback(() => {
-    window.localStorage.removeItem(STORAGE_KEY);
-    setEstado({ autenticado: false, carregando: false });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setEstado({ usuario: session?.user ?? null, carregando: false });
+    });
+
+    return () => listener.subscription.unsubscribe();
   }, []);
 
   return (
-    <ConsumerSessionContext.Provider value={{ autenticado, carregando, entrar, sair }}>
-      {children}
-    </ConsumerSessionContext.Provider>
+    <ConsumerSessionContext.Provider value={estado}>{children}</ConsumerSessionContext.Provider>
   );
 }
 

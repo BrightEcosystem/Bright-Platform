@@ -4,14 +4,27 @@ import { publicEnv } from "@/config/env";
 
 const PUBLIC_PATHS = ["/login", "/esqueci-minha-senha", "/redefinir-senha", "/auth/callback"];
 
-// O Aplicativo do Consumidor (APP-001) tem identidade própria (IDENT-001), separada da
-// autenticação multiempresa da Retaguarda — não deve ser bloqueado por esta checagem de sessão.
+// O Aplicativo do Consumidor tem identidade própria (IDENT-001), separada da
+// autenticação multiempresa da Retaguarda, mas a partir de CORE-002.2 também
+// exige sessão real do Supabase — apenas as rotas de entrada/recuperação
+// permanecem públicas dentro de /cliente/*.
+const CONSUMER_PUBLIC_PATHS = [
+  "/cliente/entrar",
+  "/cliente/onboarding",
+  "/cliente/esqueci-senha",
+  "/cliente/redefinir-senha",
+];
+
 function isConsumerPath(pathname: string): boolean {
   return pathname === "/cliente" || pathname.startsWith("/cliente/");
 }
 
+function isConsumerPublicPath(pathname: string): boolean {
+  return CONSUMER_PUBLIC_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));
+}
+
 function isPublicPath(pathname: string): boolean {
-  if (isConsumerPath(pathname)) return true;
+  if (isConsumerPath(pathname)) return isConsumerPublicPath(pathname);
   return PUBLIC_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));
 }
 
@@ -48,7 +61,7 @@ export async function proxy(request: NextRequest) {
 
   if (!user && !publicPath) {
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/login";
+    redirectUrl.pathname = isConsumerPath(pathname) ? "/cliente/entrar" : "/login";
     redirectUrl.search = "";
     if (pathname && pathname !== "/") {
       redirectUrl.searchParams.set("next", pathname);
@@ -59,6 +72,13 @@ export async function proxy(request: NextRequest) {
   if (user && pathname === "/login") {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/dashboard";
+    redirectUrl.search = "";
+    return NextResponse.redirect(redirectUrl);
+  }
+
+  if (user && (pathname === "/cliente/entrar" || pathname.startsWith("/cliente/entrar/"))) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = "/cliente/inicio";
     redirectUrl.search = "";
     return NextResponse.redirect(redirectUrl);
   }

@@ -20,5 +20,9 @@ export async function GET(request: Request) {
     }
   }
 
-  return NextResponse.redirect(`${origin}/login?error=callback`);
+  // O destino pretendido (next) indica se o link era do Aplicativo do
+  // Consumidor ou da Retaguarda — o erro deve devolver a pessoa para o
+  // login correto, não sempre para o administrativo.
+  const fallback = safeNext.startsWith("/cliente") ? "/cliente/entrar" : "/login";
+  return NextResponse.redirect(`${origin}${fallback}?error=callback`);
 }

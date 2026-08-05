@@ -24,8 +24,9 @@ Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.
 | ✅ | 01/08/2026 | 02/08/2026 | APP-001 | Fundação Visual do Aplicativo do Consumidor | `680918a` | Concluída |
 | ✅ | 01/08/2026 | 02/08/2026 | HOM-001 | Homologação do Aplicativo do Consumidor | `e59097a` | Concluída — **Gate: APROVADO** |
 | ➖ | — | — | QA-001 | Estabilização Pós-Homologação | — | **Não executada** — nenhum defeito impeditivo encontrado em `HOM-001` |
-| ✅ | 02/08/2026 | 05/08/2026 | CORE-002.1 | Schema, Funções e RLS (Conta Fidelidade / Lançamentos) | — | Concluída — 8 migrations aplicadas ao Supabase real, 24/24 testes aprovados (`docs/reports/CORE-002.1-Relatorio.md`) |
-| 🔄 | — | — | CORE-002.2 | Autenticação Real do Consumidor | — | Aguardando confirmação da Direção sobre o relatório de CORE-002.1 |
+| ✅ | 02/08/2026 | 05/08/2026 | CORE-002.1 | Schema, Funções e RLS (Conta Fidelidade / Lançamentos) | `e0b8889` | Concluída — 8 migrations aplicadas ao Supabase real, 24/24 testes aprovados (`docs/reports/CORE-002.1-Relatorio.md`) |
+| ✅ | 05/08/2026 | 05/08/2026 | CORE-002.2 | Autenticação Real do Consumidor | — | Concluída — 18/18 critérios de aceite aprovados (`docs/reports/CORE-002.2-Relatorio.md`) |
+| 🔄 | — | — | CORE-002.3 | Conta Fidelidade, Carteira e Lançamentos Reais | — | Aguardando confirmação da Direção sobre o relatório de CORE-002.2 |
 
 ## Por que esta ordem
 
@@ -41,7 +42,8 @@ graph TD
     DS001 --> APP001[APP-001<br/>Fundação visual]
     APP001 --> HOM001[HOM-001<br/>Homologação pública<br/>APROVADO]
     HOM001 --> CORE0021[CORE-002.1<br/>Schema/Funções/RLS<br/>Concluída]
-    CORE0021 --> CORE0022[CORE-002.2<br/>Autenticação real<br/>aguardando autorização]
+    CORE0021 --> CORE0022[CORE-002.2<br/>Autenticação real<br/>Concluída]
+    CORE0022 --> CORE0023[CORE-002.3<br/>Carteira real<br/>aguardando autorização]
 ```
 
 `QA-001` não foi executada — gate aprovado sem ajustes obrigatórios (ver notas abaixo).
@@ -60,4 +62,5 @@ graph TD
 - `QA-001`: **não executada** — a Direção confirmou que nenhum defeito impeditivo foi encontrado em `HOM-001`. Permanece no roadmap como fase condicional para entregas futuras.
 - `CORE-002` (programa em andamento, dividido em sub-fases): objetivo geral — transformar o Aplicativo do Consumidor de prova de conceito mockada em aplicação integrada ao Core: autenticação real do consumidor, Conta Fidelidade real (`IDENT-001`), dados reais do Supabase, carteira/saldo/cashback reais, remoção gradual dos mocks. **Fora de escopo em todo o programa:** roleta, raspadinha, baús, missões, ranking, XP como mecânica, campanhas automáticas, notificações, marketplace operacional — permanecem desacoplados até a base de identidade e carteira estar operacional. Não pode alterar a arquitetura já congelada sem ADR.
 - `CORE-002.1` (concluída, `docs/reports/CORE-002.1-Relatorio.md`): plano técnico v0.3.0 (`docs/architecture/CORE-002-Plano-Tecnico.md`) incorporando os 14 ajustes obrigatórios da revisão v0.2.0 mais as decisões finais da Direção (permissões mapeadas, estado `closed` com `closed_at`/`closed_reason`, idempotência única por tenant, precisão por `asset_type`, `criar_lancamento` reforçada). 8 migrations aplicadas ao Supabase real: 2 tabelas (`contas_fidelidade`, `lancamentos`), 5 funções `security definer`, RLS completa (4 políticas de `SELECT`, nenhuma de escrita direta), extensão do catálogo de permissões. Matriz de 24 testes obrigatórios executada com dados fictícios reais (usuários via Admin API, sessão simulada) — **24/24 aprovados**, após 2 correções aplicadas na própria execução: `REVOKE EXECUTE`/privilégios de tabela não bloqueavam `anon`/`authenticated` por padrão neste projeto Supabase (mecanismo de `alter default privileges`), e a checagem de saldo suficiente bloqueava incorretamente estornos. Nenhuma alteração em tabela existente do Core, nenhum arquivo de código-fonte alterado. Dados fictícios 100% removidos e confirmados por consulta.
-- `CORE-002.2` — Autenticação Real do Consumidor: **aguardando confirmação da Direção sobre o relatório de `CORE-002.1`** antes de iniciar.
+- `CORE-002.2` (concluída, `docs/reports/CORE-002.2-Relatorio.md`): autenticação simulada (`localStorage`) substituída por Supabase Auth real — login, logout, sessão persistente, recuperação/redefinição de senha, cadastro, proteção de rotas no servidor (`src/proxy.ts`, `auth.getUser()`, não mais no client). 2 rotas técnicas novas (`/cliente/esqueci-senha`, `/cliente/redefinir-senha`), fora do mapa de 12 telas congelado de `UX-001`. **18/18 critérios de aceite aprovados**, incluindo confirmação de que a identidade única permite a mesma sessão acessar Retaguarda e Aplicativo do Consumidor sem loop. Nenhuma migration criada, nenhum mock financeiro alterado, nenhuma alteração em RLS/funções de `CORE-002.1`. Dados fictícios 100% removidos.
+- `CORE-002.3` — Conta Fidelidade, Carteira e Lançamentos Reais: **aguardando confirmação da Direção sobre o relatório de `CORE-002.2`** antes de iniciar.

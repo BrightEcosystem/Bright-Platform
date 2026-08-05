@@ -1,12 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ChevronRight, LogOut, Settings, Store } from "lucide-react";
 import { Avatar } from "@/components/consumer/Avatar";
 import { IndicadorDeNivel } from "@/components/consumer/IndicadorDeNivel";
 import { Botao } from "@/components/consumer/Botao";
-import { useConsumerSession } from "@/contexts/consumer-session-context";
+import { signOutConsumer } from "@/services/consumer-auth/actions";
 import { mockContaFidelidade } from "@/services/mock";
 
 const ATALHOS = [
@@ -16,9 +13,6 @@ const ATALHOS = [
 
 /** Tela Perfil (UX-001 §5.10) — dados do consumidor, atalhos e sair. */
 export default function PerfilPage() {
-  const router = useRouter();
-  const { sair } = useConsumerSession();
-
   return (
     <div className="mx-auto flex max-w-md flex-col gap-6 px-4 py-6">
       <div className="flex flex-col items-center gap-3 text-center">
@@ -46,17 +40,12 @@ export default function PerfilPage() {
         ))}
       </div>
 
-      <Botao
-        variante="secundario"
-        className="w-full"
-        onClick={() => {
-          sair();
-          router.push("/cliente/entrar");
-        }}
-      >
-        <LogOut className="size-4" aria-hidden="true" />
-        Sair
-      </Botao>
+      <form action={signOutConsumer}>
+        <Botao type="submit" variante="secundario" className="w-full">
+          <LogOut className="size-4" aria-hidden="true" />
+          Sair
+        </Botao>
+      </form>
     </div>
   );
 }
