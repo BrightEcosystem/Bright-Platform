@@ -48,15 +48,20 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - [x] **APP-001** — Fundação Visual do Aplicativo do Consumidor: 12 telas de `UX-001` + 1 rota técnica de redirecionamento sob `/cliente/*` (13 rotas no total), os 16 componentes de `DS-001`, navegação inferior fixa, sessão mockada (sem autenticação real), dados mockados para todas as entidades de `DATA-001` (`docs/BE-009-Fundacao-Visual-do-Aplicativo-do-Consumidor.md`, `docs/reports/APP-001-Relatorio.md`) — **concluída**
 - [x] **HOM-001** — Homologação do Aplicativo do Consumidor: repositório público, Vercel conectada, deploy de produção, 13 rotas validadas mobile/desktop na URL pública, 1 falha crítica encontrada (tema claro não aplicado) e corrigida nesta mesma execução (`e59097a`), fluxo de login confirmado por clique/digitação reais, regressão da Retaguarda confirmada sem impacto (`docs/reports/HOM-001-Relatorio.md`) — **concluída — Gate: APROVADO pela Direção**
 - [ ] ~~**QA-001**~~ — Estabilização Pós-Homologação (**fase condicional**): **não executada** — a Direção confirmou que nenhum defeito impeditivo foi encontrado em `HOM-001`. Permanece condicional para entregas futuras.
-- [ ] **CORE-002** — Evolução do Core — Integração Real: autenticação real do consumidor, Conta Fidelidade real (`IDENT-001`), dados reais do Supabase, carteira/saldo/cashback reais, remoção gradual dos mocks — **CORE-002.1 (Revisão Final do Schema e da RLS) em andamento**: plano técnico revisado para **v0.2.0** (`docs/architecture/CORE-002-Plano-Tecnico.md`) incorporando os 14 ajustes obrigatórios exigidos pela Direção sobre a v0.1.0 (ledger unificado por `asset_type`, natureza crédito/débito, idempotência obrigatória, saldo derivado do ledger, RLS completa por operação/ator, função `has_permission`, criação de lançamento só via função segura, índices, rollback) — **aguardando nova autorização da Direção antes de aplicar migrations**. Fora de escopo nesta fase: gamificação (roleta, raspadinha, baús, missões, ranking, XP), campanhas automáticas, notificações, marketplace operacional.
+- [x] **CORE-002.1** — Schema, Funções e RLS (Conta Fidelidade / Lançamentos): plano técnico `v0.3.0` (`docs/architecture/CORE-002-Plano-Tecnico.md`) autorizado pela Direção com decisões finais de permissões/estado/idempotência/precisão. 8 migrations aplicadas ao Supabase real: tabelas `contas_fidelidade`/`lancamentos`, 5 funções `security definer`, RLS completa (só `SELECT`), catálogo de permissões estendido (`tenant.consumers.view`/`manage`). Matriz de 24 testes obrigatórios aprovada (2 correções aplicadas na própria execução — ver `docs/reports/CORE-002.1-Relatorio.md`). Dados fictícios 100% removidos. **Concluída.**
+- [ ] **CORE-002.2** — Autenticação Real do Consumidor: login/logout/sessão persistente/recuperação de senha/proteção de rotas via Supabase Auth — **aguardando confirmação da Direção sobre o relatório de CORE-002.1**.
+- [ ] **CORE-002.3** — Conta Fidelidade e carteira reais: `src/services/mock/conta-fidelidade.ts`/`lancamentos.ts` substituídos por serviços reais — aguardando CORE-002.2.
+- [ ] **CORE-002.4** — Testes funcionais com dados fictícios, limpeza, validação de regressão — aguardando CORE-002.3.
+- [ ] **CORE-002.5** — Documentação e relatório final de encerramento de CORE-002 — aguardando CORE-002.4.
 
-## Estado atual do banco (confirmado em CORE-001, sem alteração desde então)
+## Estado atual do banco (atualizado em CORE-002.1)
 
-- 10 migrations aplicadas, `local == remote`
-- RLS habilitada em 10 tabelas do schema `public`
-- Catálogo de 15 permissões, 4 papéis de sistema
+- 18 migrations aplicadas, `local == remote` (10 da fundação multiempresa + 8 de `CORE-002.1`)
+- RLS habilitada em 12 tabelas do schema `public` (as 10 originais + `contas_fidelidade`/`lancamentos`)
+- Catálogo de 17 permissões (15 originais + `tenant.consumers.view`/`tenant.consumers.manage`), 4 papéis de sistema
 - Nenhum dado real inserido — apenas dados fictícios temporários, sempre removidos ao final de cada fase
 - Mecanismo de contratação modular (`products`/`tenant_products`) já em produção, reaproveitável para os módulos de gamificação (`ARCH-001 §8`)
+- Lição registrada em `CORE-002.1` para toda tabela/função nova: `REVOKE ... FROM PUBLIC` não é suficiente neste projeto Supabase — `alter default privileges` concede automaticamente privilégios a `anon`/`authenticated`/`service_role` na criação; é preciso revogar explicitamente de cada papel específico (ver `docs/reports/CORE-002.1-Relatorio.md §4`)
 
 ## Pendências abertas (ver relatórios individuais para detalhes)
 
@@ -77,7 +82,10 @@ Checklist de alto nível das fases já concluídas do plano oficial de execuçã
 - **`HOM-001` concluída — Gate: APROVADO pela Direção** (1 falha crítica encontrada e corrigida na mesma execução, `e59097a`). `QA-001` não executada. `CORE-002` liberada e em andamento.
 - Rotas placeholder órfãs (`empresas`, `agentes-ia`, `workflows`, `integracoes`, `licitacoes`, `financeiro`, `analytics`) não correspondem a nenhum módulo da arquitetura atual (`ARCH-001 §5`) — candidatas a remoção em fase futura de código
 - Conexão real com a Vercel pendente de ação manual da Direção (`RUN-005 §1`)
+- Reabertura de Conta Fidelidade fechada (`status = 'closed'`) não é implementada — processo administrativo excepcional e auditado, deliberadamente fora do escopo de `CORE-002.1` (`docs/reports/CORE-002.1-Relatorio.md §9`)
+- Ciclo completo de `estado` do lançamento (`pendente → confirmado → disponível`) sem mecanismo de transição — o ledger é append-only (nunca `UPDATE`); nesta fase todo lançamento nasce em `disponivel`; automação de confirmação fica para fase futura de gamificação/campanhas
+- Papel `tenant.member` citado nas decisões da Direção não existe fisicamente no catálogo (`PERM-001`) — apenas `platform.admin`/`tenant.admin`/`project.manager`/`project.viewer`
 
 ## Próxima fase
 
-Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` → `APP-001` → `HOM-001` (**Gate: APROVADO**) → `QA-001` (não executada) → `CORE-002` (**em andamento** — análise inicial).
+Sequência definida pela Direção (ver `PROJECT-ROADMAP.md`): `DS-001` → `APP-001` → `HOM-001` (**Gate: APROVADO**) → `QA-001` (não executada) → `CORE-002.1` (**concluída**) → `CORE-002.2` (aguardando autorização da Direção).
