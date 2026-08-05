@@ -1,4 +1,6 @@
-# Bright Multi Plataforma — Checklist de Execução
+# Orbe Flow - Cashback — Checklist de Execução
+
+_Nome do projeto desde `ADR-003` (05/08/2026) — arquitetura técnica de três camadas permanece a de `ADR-002`, referenciada nas fases abaixo pelo nome histórico "Bright Multi Plataforma"._
 
 Checklist de alto nível das fases já concluídas do plano oficial de execução (`docs/BE-001-Fundacao-Bright-Ecosystem.md`). Cada linha aponta para o relatório correspondente em `docs/reports/`. Não substitui os relatórios — é apenas um índice rápido do progresso. Para a **sequência e dependência entre fases**, ver `PROJECT-ROADMAP.md`.
 

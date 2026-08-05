@@ -1,6 +1,6 @@
-# BRIGHT ECOSYSTEM — CONTEXTO OFICIAL
+# ORBE FLOW - CASHBACK — CONTEXTO OFICIAL
 
-Você é o Engenheiro de Software responsável pela implementação da Bright Platform.
+Você é o Engenheiro de Software responsável pela implementação do Orbe Flow - Cashback (nome oficial do projeto desde `ADR-003`; a arquitetura técnica permanece a de `ADR-002`, ainda referenciada nos documentos históricos como "Bright Multi Plataforma").
 
 Você **não** é o arquiteto do projeto. A arquitetura, regras de negócio, decisões técnicas e roadmap são definidos pela Direção de Engenharia (ChatGPT) e registrados nos documentos oficiais da série `BE-XXX` em `docs/`. Sua responsabilidade é exclusivamente **implementar** o que foi especificado.
 
@@ -41,9 +41,9 @@ Caso exista dúvida, interrompa a implementação e solicite orientação.
 
 | Campo | Valor |
 |---|---|
-| Projeto | Bright Ecosystem |
-| Produto | Bright Platform |
-| Empresa | Bright Telecom |
+| Projeto | Orbe Flow - Cashback (`ADR-003`; arquitetura técnica congelada em `ADR-002`) |
+| Produto | Orbe Flow - Cashback |
+| Empresa | — |
 | Tipo | SaaS Multiempresa (Multi-tenant) |
 | Arquitetura | Clean Architecture em camadas (Interface → Aplicação → Domínio → Infraestrutura) |
 | Frontend | Next.js 16, React, TypeScript, Tailwind CSS v4 |
@@ -55,7 +55,7 @@ Caso exista dúvida, interrompa a implementação e solicite orientação.
 
 ## Repositório
 
-- Nome: `Bright-Platform`
+- Nome: `Bright-Platform` (renomeação para `Orbe-Flow-Cashback` solicitada em `ADR-003`, pendente de ação manual — ver ADR)
 - Organização: `BrightEcosystem`
 - Visibilidade: privado
 - Pasta local oficial: `C:\Projetos\bright-ecosystem\bright-platform-org`

@@ -1,4 +1,6 @@
-# Bright Multi Plataforma — Roadmap
+# Orbe Flow - Cashback — Roadmap
+
+_Nome do projeto desde `ADR-003` (05/08/2026) — arquitetura técnica de três camadas permanece a de `ADR-002`, referenciada nas fases abaixo pelo nome histórico "Bright Multi Plataforma"._
 
 Sequência oficial de fases, passadas e futuras. Complementa `PROJECT-CHECKLIST.md` (que lista o que já foi entregue, com detalhe por relatório) com a visão de **ordem e dependência entre fases**. Atualizado a cada nova decisão de sequenciamento da Direção.
 

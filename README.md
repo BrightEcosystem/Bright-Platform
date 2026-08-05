@@ -1,8 +1,8 @@
-# Bright Platform
+# Orbe Flow - Cashback
 
-Bright Ecosystem — Intelligent Customer Relationship Platform.
+Plataforma multiempresa de fidelidade, cashback, pontuação e gamificação (`ADR-002`, `ADR-003`).
 
-Ambiente central de acesso ao ecossistema Bright: gestão de empresas, usuários, clientes, produtos, agentes de IA, workflows e integrações.
+Três camadas sobre um Core compartilhado: Core da Plataforma (autenticação, multiempresa, permissões), Retaguarda da Empresa (gestão de clientes, campanhas, cashback/pontuação) e Aplicativo do Consumidor (carteira, missões, XP, Marketplace de Benefícios).
 
 ## Documentação oficial
 
