@@ -1,0 +1,76 @@
+schema_version: "1.0"
+repository:
+  id: bright-platform
+  product: orbe-flow-cashback
+  default_branch: main
+  language: pt-BR
+
+canonical_paths:
+  application: src/
+  ai_root: ai/
+  agents: ai/agents/
+  prompts: ai/prompts/
+  skills: ai/skills/
+  rules: ai/rules/
+  evaluations: ai/evaluations/
+  documentation: docs/
+  database_design: database/
+  database_migrations_applied: supabase/migrations/
+  automation_n8n: automation/n8n/
+  supabase_config: supabase/
+  supabase_scripts: scripts/supabase/
+  tests: tests/
+  security_reports: reports/security/
+
+retrieval:
+  required_filters:
+    repository_id: bright-platform
+    product_id: orbe-flow-cashback
+    status: active
+  source_priority:
+    - supabase/migrations/
+    - database/
+    - src/
+    - docs/decisions/
+    - docs/runbooks/
+    - docs/
+    - ai/rules/
+    - ai/prompts/
+  include:
+    - src/**
+    - ai/**
+    - database/**
+    - supabase/**
+    - automation/**
+    - docs/**
+    - tests/**
+  exclude:
+    - node_modules/**
+    - .next/**
+    - coverage/**
+    - reports/**
+    - "**/*.log"
+    - "**/archive/**"
+    - "**/deprecated/**"
+
+path_fallbacks:
+  - requested: database/migrations/
+    canonical: supabase/migrations/
+    reason: "Migrações efetivamente aplicadas e sincronizadas com o Supabase."
+  - requested: integrations/n8n/
+    canonical: automation/n8n/
+  - requested: agents/
+    canonical: ai/agents/
+  - requested: prompts/
+    canonical: ai/prompts/
+  - requested: skills/
+    canonical: ai/skills/
+  - requested: schemas/
+    canonical: ai/schemas/
+
+rules:
+  - "Nunca inferir caminhos fora de canonical_paths."
+  - "Quando um caminho solicitado não existir, consultar path_fallbacks antes de falhar."
+  - "Não usar conteúdo de archive, deprecated, reports ou artefatos gerados como fonte factual."
+  - "Em conflito, usar source_priority e registrar o caminho do arquivo usado."
+  - "Não coletar nem registrar segredos, arquivos .env locais ou dados pessoais."
