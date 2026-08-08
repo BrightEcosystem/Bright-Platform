@@ -1,0 +1,49 @@
+schema_version: "1.0"
+repository_id: bright-platform
+product_id: orbe-flow-cashback
+manifest: /manifest.yaml
+
+defaults:
+  status: active
+  language: pt-BR
+  require_source_path: true
+  on_missing_path: consult_manifest_fallbacks
+
+collections:
+  agents:
+    path: ai/agents/
+    type: agent
+  prompts:
+    path: ai/prompts/
+    type: prompt
+  skills:
+    path: ai/skills/
+    type: skill
+  rules:
+    path: ai/rules/
+    type: rule
+  evaluations:
+    path: ai/evaluations/
+    type: evaluation
+  schemas:
+    path: ai/schemas/
+    type: schema
+
+accepted_status:
+  - active
+  - draft
+  - deprecated
+  - archived
+
+retrieval_policy:
+  allowed_status:
+    - active
+  reject_without_project_id: true
+  reject_without_source_path: true
+  ignore:
+    - "**/archive/**"
+    - "**/deprecated/**"
+  evidence:
+    include_repository_id: true
+    include_file_path: true
+    include_commit_sha: true
