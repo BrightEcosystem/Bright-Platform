@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/BrightEcosystem/Bright-Platform/blob/main/ai/schemas/retrieval.schema.json",
+  "title": "Bright Platform Retrieval Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["repository_id", "product_id", "status", "query"],
+  "properties": {
+    "repository_id": {
+      "const": "bright-platform"
+    },
+    "product_id": {
+      "const": "orbe-flow-cashback"
+    },
+    "status": {
+      "const": "active"
+    },
+    "query": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 1000
+    },
+    "allowed_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "src/",
+          "ai/",
+          "database/",
+          "supabase/",
+          "automation/",
+          "docs/",
+          "tests/"
+        ]
+      }
+    },
+    "source_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository_id", "file_path", "commit_sha"],
+      "properties": {
+        "repository_id": {"const": "bright-platform"},
+        "file_path": {"type": "string", "minLength": 1},
+        "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{7,40}$"}
+      }
+    }
+  }
+}
